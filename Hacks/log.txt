@@ -1,0 +1,80 @@
+[22:56:05.078] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Update () [0x00021] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnUpdate () [0x00044] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnUpdate>b__50_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+[22:56:06.166] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Update () [0x00021] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnUpdate () [0x00044] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnUpdate>b__50_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+[22:56:07.446] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Update () [0x00021] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnUpdate () [0x00044] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnUpdate>b__50_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+[22:56:25.758] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Draw () [0x00069] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnGUI () [0x0006c] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnGUI>b__37_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+[22:56:26.014] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Draw () [0x00069] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnGUI () [0x0006c] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnGUI>b__37_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+[22:56:30.410] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Draw () [0x00069] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnGUI () [0x0006c] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnGUI>b__37_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+[22:56:30.772] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Draw () [0x00069] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnGUI () [0x0006c] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnGUI>b__37_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+[22:56:31.153] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Draw () [0x00069] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnGUI () [0x0006c] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnGUI>b__37_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+[22:56:31.507] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Draw () [0x00069] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnGUI () [0x0006c] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnGUI>b__37_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+[23:13:48.289] [3Hack] [ERROR] System.InvalidOperationException: Collection was modified; enumeration operation may not execute.
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNextRare () [0x00013] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at System.Collections.Generic.List`1+Enumerator[T].MoveNext () [0x0004a] in <e40e5a8f982c4b618a930d29f9bd091c>:0
+  at ClientWindowManager.Update () [0x00021] in <7044930e2db6478e8870f3754e75dbee>:0
+  at ModMain.OnUpdate () [0x00044] in <7044930e2db6478e8870f3754e75dbee>:0
+  at MelonLoader.MelonHandler+<>c.<OnUpdate>b__50_0 (MelonLoader.MelonBase x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler+<>c__DisplayClass54_0.<InvokeMelonMethod>b__1 (MelonLoader.MelonMod x) [0x00000] in <0f6d2009dc5d4313a30db0346f3f685b>:0
+  at MelonLoader.MelonHandler.InvokeMelonMethod[T] (System.Collections.Generic.List`1[T]& melons, MelonLoader.MelonHandler+InvokeMelonMethodDelegate`1[T] method, System.Boolean remove_failed) [0x00032] in <0f6d2009dc5d4313a30db0346f3f685b>:0
