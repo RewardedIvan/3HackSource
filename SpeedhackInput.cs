@@ -1,19 +1,20 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: SpeedhackInput
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
+﻿using System;
 using ModuleType;
 using UnityEngine;
 
+// Token: 0x02000009 RID: 9
 public class SpeedhackInput : TextInput
 {
-  public SpeedhackInput()
-  {
-    this.text = PlayerPrefs.GetString("SpeedhackValue", "1");
-    this.numberOnly = true;
-  }
+	// Token: 0x06000011 RID: 17 RVA: 0x0000254F File Offset: 0x0000074F
+	public SpeedhackInput()
+	{
+		this.text = PlayerPrefs.GetString("SpeedhackValue", "1");
+		this.numberOnly = true;
+	}
 
-  public override void Update() => PlayerPrefs.SetString("SpeedhackValue", this.text);
+	// Token: 0x06000012 RID: 18 RVA: 0x00002575 File Offset: 0x00000775
+	public override void Update()
+	{
+		PlayerPrefs.SetString("SpeedhackValue", this.text);
+	}
 }

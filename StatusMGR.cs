@@ -1,81 +1,103 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: StatusMGR
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
+﻿using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Windows;
 
+// Token: 0x02000012 RID: 18
 public class StatusMGR
 {
-  public static TextMeshProUGUI tltext;
-  public static TextMeshProUGUI trtext;
-  public static bool isInScene;
-  public static float totalDelta;
-  public static int frames;
+	// Token: 0x06000030 RID: 48 RVA: 0x00003CB4 File Offset: 0x00001EB4
+	public static void Init()
+	{
+		GameObject gameObject = new GameObject();
+		gameObject.name = "sus Canvas (Explodingbill)";
+		gameObject.AddComponent<Canvas>();
+		Canvas component = gameObject.GetComponent<Canvas>();
+		component.sortingOrder = 0;
+		component.renderMode = 0;
+		gameObject.AddComponent<CanvasScaler>().uiScaleMode = (CanvasScaler.ScaleMode)1;
+		TextMeshProUGUI textMeshProUGUI = new GameObject
+		{
+			transform = 
+			{
+				parent = gameObject.transform
+			},
+			name = "TopLeft"
+		}.AddComponent<TextMeshProUGUI>();
+		textMeshProUGUI.font = ModMain.fonts[0];
+		textMeshProUGUI.text = "";
+		textMeshProUGUI.fontSize = 12f;
+		textMeshProUGUI.alignment = (TextAlignmentOptions)257;
+		RectTransform component2 = textMeshProUGUI.GetComponent<RectTransform>();
+		component2.anchorMin = Vector2.up;
+		component2.anchorMax = Vector2.up;
+		component2.anchoredPosition = new Vector2(20005f, -105f);
+		component2.sizeDelta = new Vector2(40000f, 200f);
+		textMeshProUGUI.raycastTarget = false;
+		UnityEngine.Object.DontDestroyOnLoad(component.gameObject);
+		TextMeshProUGUI textMeshProUGUI2 = new GameObject
+		{
+			transform = 
+			{
+				parent = gameObject.transform
+			},
+			name = "TopRight"
+		}.AddComponent<TextMeshProUGUI>();
+		textMeshProUGUI2.font = ModMain.fonts[0];
+		textMeshProUGUI2.text = "";
+		textMeshProUGUI2.fontSize = 12f;
+		textMeshProUGUI2.alignment = (TextAlignmentOptions)260;
+		RectTransform component3 = textMeshProUGUI2.GetComponent<RectTransform>();
+		component3.anchorMin = Vector2.one;
+		component3.anchorMax = Vector2.one;
+		component3.anchoredPosition = new Vector2(-20005f, -105f);
+		component3.sizeDelta = new Vector2(40000f, 200f);
+		textMeshProUGUI2.raycastTarget = false;
+		StatusMGR.tltext = textMeshProUGUI;
+		StatusMGR.trtext = textMeshProUGUI2;
+	}
 
-  public static void Init()
-  {
-    GameObject gameObject1 = new GameObject();
-    ((Object) gameObject1).name = "sus Canvas (Explodingbill)";
-    gameObject1.AddComponent<Canvas>();
-    Canvas component1 = gameObject1.GetComponent<Canvas>();
-    component1.sortingOrder = 0;
-    component1.renderMode = (RenderMode) 0;
-    gameObject1.AddComponent<CanvasScaler>().uiScaleMode = (CanvasScaler.ScaleMode) 1;
-    GameObject gameObject2 = new GameObject();
-    gameObject2.transform.parent = gameObject1.transform;
-    ((Object) gameObject2).name = "TopLeft";
-    TextMeshProUGUI textMeshProUgui1 = gameObject2.AddComponent<TextMeshProUGUI>();
-    ((TMP_Text) textMeshProUgui1).font = ModMain.fonts[0];
-    ((TMP_Text) textMeshProUgui1).text = "";
-    ((TMP_Text) textMeshProUgui1).fontSize = 12f;
-    ((TMP_Text) textMeshProUgui1).alignment = (TextAlignmentOptions) 257;
-    RectTransform component2 = ((Component) textMeshProUgui1).GetComponent<RectTransform>();
-    component2.anchorMin = Vector2.up;
-    component2.anchorMax = Vector2.up;
-    component2.anchoredPosition = new Vector2(20005f, -105f);
-    component2.sizeDelta = new Vector2(40000f, 200f);
-    ((Graphic) textMeshProUgui1).raycastTarget = false;
-    Object.DontDestroyOnLoad((Object) ((Component) component1).gameObject);
-    GameObject gameObject3 = new GameObject();
-    gameObject3.transform.parent = gameObject1.transform;
-    ((Object) gameObject3).name = "TopRight";
-    TextMeshProUGUI textMeshProUgui2 = gameObject3.AddComponent<TextMeshProUGUI>();
-    ((TMP_Text) textMeshProUgui2).font = ModMain.fonts[0];
-    ((TMP_Text) textMeshProUgui2).text = "";
-    ((TMP_Text) textMeshProUgui2).fontSize = 12f;
-    ((TMP_Text) textMeshProUgui2).alignment = (TextAlignmentOptions) 260;
-    RectTransform component3 = ((Component) textMeshProUgui2).GetComponent<RectTransform>();
-    component3.anchorMin = Vector2.one;
-    component3.anchorMax = Vector2.one;
-    component3.anchoredPosition = new Vector2(-20005f, -105f);
-    component3.sizeDelta = new Vector2(40000f, 200f);
-    ((Graphic) textMeshProUgui2).raycastTarget = false;
-    StatusMGR.tltext = textMeshProUgui1;
-    StatusMGR.trtext = textMeshProUgui2;
-  }
+	// Token: 0x06000031 RID: 49 RVA: 0x00003E9C File Offset: 0x0000209C
+	public static void Update()
+	{
+		bool flag = StatusMGR.isInScene && !PauseMenuManager.paused;
+		if (flag)
+		{
+			StatusMGR.totalDelta += Time.deltaTime;
+			StatusMGR.frames++;
+		}
+		Status.UpdateText(StatusMGR.tltext);
+	}
 
-  public static void Update()
-  {
-    if (StatusMGR.isInScene && !PauseMenuManager.paused)
-    {
-      StatusMGR.totalDelta += Time.deltaTime;
-      ++StatusMGR.frames;
-    }
-    Status.UpdateText(StatusMGR.tltext);
-  }
+	// Token: 0x06000032 RID: 50 RVA: 0x00003EEC File Offset: 0x000020EC
+	public static void OnSceneChanged(int sceneIndex, string sceneName)
+	{
+		StatusMGR.totalDelta = 0f;
+		StatusMGR.frames = 0;
+		bool flag = UnityEngine.Object.FindObjectOfType<PlayerScript>() != null;
+		if (flag)
+		{
+			StatusMGR.isInScene = true;
+		}
+		else
+		{
+			StatusMGR.isInScene = false;
+		}
+	}
 
-  public static void OnSceneChanged(int sceneIndex, string sceneName)
-  {
-    StatusMGR.totalDelta = 0.0f;
-    StatusMGR.frames = 0;
-    if (Object.op_Inequality((Object) Object.FindObjectOfType<PlayerScript>(), (Object) null))
-      StatusMGR.isInScene = true;
-    else
-      StatusMGR.isInScene = false;
-  }
+	// Token: 0x04000013 RID: 19
+	public static TextMeshProUGUI tltext;
+
+	// Token: 0x04000014 RID: 20
+	public static TextMeshProUGUI trtext;
+
+	// Token: 0x04000015 RID: 21
+	public static bool isInScene;
+
+	// Token: 0x04000016 RID: 22
+	public static float totalDelta;
+
+	// Token: 0x04000017 RID: 23
+	public static int frames;
 }

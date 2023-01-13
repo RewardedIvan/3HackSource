@@ -1,13 +1,17 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: RenderPipelineManager
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
-using System;
+﻿using System;
+using System.Diagnostics;
 using UnityEngine;
 
+// Token: 0x02000006 RID: 6
 public static class RenderPipelineManager
 {
-  public static event Action<ScriptableRenderContext, Camera> endCameraRendering;
+	// Token: 0x14000001 RID: 1
+	// (add) Token: 0x0600000C RID: 12 RVA: 0x000024A0 File Offset: 0x000006A0
+	// (remove) Token: 0x0600000D RID: 13 RVA: 0x000024D4 File Offset: 0x000006D4
+
+	// there is probably a reason this line exists, but i didnt notice a single difference, soooo
+	//[DebuggerBrowsable(DebuggerBrowsableState.Never)]
+
+	// GizmosInstance.cs:156 ; GizmosInstance.cs:170
+	public static event Action<ScriptableRenderContext, Camera> endCameraRendering;
 }

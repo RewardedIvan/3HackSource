@@ -1,102 +1,143 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: Window
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Token: 0x02000017 RID: 23
 public class Window
 {
-  public Rect rect = new Rect(50f, 20f, 230f * ModMain.scale, 50f * ModMain.scale);
-  public Rect rectAct = new Rect(50f, 20f, 230f * ModMain.scale, 50f * ModMain.scale);
-  public Vector2 offset;
-  public bool dragging = false;
-  public bool render = false;
-  public string name = "Test Window :)";
-  public List<Module> modules = new List<Module>();
+	// Token: 0x0600004E RID: 78 RVA: 0x00004CDC File Offset: 0x00002EDC
+	public virtual void Draw()
+	{
+		GUI.skin.label.fontSize = Mathf.RoundToInt(23f * ModMain.scale);
+		bool flag = !ModMain.showClickGUI;
+		if (!flag)
+		{
+			this.rectAct = new Rect(this.rect.x, this.rect.y, 230f * ModMain.scale, 50f * ModMain.scale);
+			DrawUtils.DrawRect(this.rect, DrawUtils.Accent());
+			GUI.skin.label.alignment = (TextAnchor)4;
+			DrawUtils.DrawText(this.rect, this.name, Color.white);
+			DrawUtils.DrawRect(this.AddRect(this.rect, new Rect(0f, 50f * ModMain.scale, 0f, 50f * ModMain.scale * (float)this.modules.Count)), new Color(0.14117648f, 0.14117648f, 0.14117648f));
+            Vector2 vector = new Vector2(Input.mousePosition.x, (float)Screen.height - Input.mousePosition.y);
+            int num = 0;
+			foreach (Module module in this.modules)
+			{
+				num++;
+				module.Draw(this.AddRect(this.rect, new Rect(0f, 50f * (float)num * ModMain.scale, 0f, 0f)), this);
+			}
+			this.rectAct = this.AddRect(this.rectAct, new Rect(0f, 0f, 0f, 50f * ModMain.scale * (float)num));
+		}
+	}
 
-  public virtual void Draw()
-  {
-    GUI.skin.label.fontSize = Mathf.RoundToInt(23f * ModMain.scale);
-    if (!ModMain.showClickGUI)
-      return;
-    this.rectAct = new Rect(((Rect) ref this.rect).x, ((Rect) ref this.rect).y, 230f * ModMain.scale, 50f * ModMain.scale);
-    DrawUtils.DrawRect(this.rect, DrawUtils.Accent());
-    GUI.skin.label.alignment = (TextAnchor) 4;
-    DrawUtils.DrawText(this.rect, this.name, Color.white);
-    DrawUtils.DrawRect(this.AddRect(this.rect, new Rect(0.0f, 50f * ModMain.scale, 0.0f, 50f * ModMain.scale * (float) this.modules.Count)), new Color(0.141176477f, 0.141176477f, 0.141176477f));
-    Vector2 vector2;
-    // ISSUE: explicit constructor call
-    ((Vector2) ref vector2).\u002Ector(Input.mousePosition.x, (float) Screen.height - Input.mousePosition.y);
-    int num = 0;
-    foreach (Module module in this.modules)
-    {
-      ++num;
-      module.Draw(this.AddRect(this.rect, new Rect(0.0f, 50f * (float) num * ModMain.scale, 0.0f, 0.0f)), this);
-    }
-    this.rectAct = this.AddRect(this.rectAct, new Rect(0.0f, 0.0f, 0.0f, 50f * ModMain.scale * (float) num));
-  }
+	// Token: 0x0600004F RID: 79 RVA: 0x00004EBC File Offset: 0x000030BC
+	public virtual void OnUpdate()
+	{
+	}
 
-  public virtual void OnUpdate()
-  {
-  }
+	// Token: 0x06000050 RID: 80 RVA: 0x00004EBF File Offset: 0x000030BF
+	public virtual void OnLateUpdate()
+	{
+	}
 
-  public virtual void OnLateUpdate()
-  {
-  }
+	// Token: 0x06000051 RID: 81 RVA: 0x00004EC4 File Offset: 0x000030C4
+	public void Update()
+	{
+		foreach (Module module in this.modules)
+		{
+			bool keyDown = Input.GetKeyDown(module.keybind);
+			if (keyDown)
+			{
+				module.enabled = !module.enabled;
+				ModMain.cwm.wnds.Remove(this);
+				ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, this);
+			}
+			module.Update();
+			foreach (ModuleSetting moduleSetting in module.settings)
+			{
+				moduleSetting.Update();
+			}
+		}
+        Vector2 vector = new Vector2(Input.mousePosition.x, (float)Screen.height - Input.mousePosition.y);
+        bool showClickGUI = ModMain.showClickGUI;
+		if (showClickGUI)
+		{
+			bool flag = !Input.GetMouseButton(0);
+			if (flag)
+			{
+				this.dragging = false;
+			}
+			float timeScale = Time.timeScale;
+			Time.timeScale = 0.1f;
+			bool flag2 = vector.x > this.rect.position.x && vector.y > this.rect.position.y && vector.x < this.rect.position.x + this.rect.width && vector.y < this.rect.position.y + this.rect.height;
+			if (flag2)
+			{
+				bool mouseButtonDown = Input.GetMouseButtonDown(0);
+				if (mouseButtonDown)
+				{
+					this.offset = this.rect.position - vector;
+					this.dragging = true;
+					ModMain.cwm.wnds.Remove(this);
+					ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, this);
+				}
+			}
+			bool flag3 = this.dragging;
+			if (flag3)
+			{
+				this.rect.position = vector + this.offset;
+			}
+			bool flag4 = this.rect.x < 0f;
+			if (flag4)
+			{
+				this.rect.x = 0f;
+			}
+			bool flag5 = this.rect.y < 0f;
+			if (flag5)
+			{
+				this.rect.y = 0f;
+			}
+			bool flag6 = this.rect.x > (float)Screen.width - this.rect.width;
+			if (flag6)
+			{
+				this.rect.x = (float)Screen.width - this.rect.width;
+			}
+			bool flag7 = this.rect.y + this.rectAct.height > (float)Screen.height;
+			if (flag7)
+			{
+				this.rect.y = (float)Screen.height - this.rectAct.height;
+			}
+			Time.timeScale = timeScale;
+		}
+		this.OnUpdate();
+	}
 
-  public void Update()
-  {
-    foreach (Module module in this.modules)
-    {
-      if (Input.GetKeyDown(module.keybind))
-      {
-        module.enabled = !module.enabled;
-        Window window = this;
-        ModMain.cwm.wnds.Remove(this);
-        ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, window);
-      }
-      module.Update();
-      foreach (Module setting in module.settings)
-        setting.Update();
-    }
-    Vector2 vector2;
-    // ISSUE: explicit constructor call
-    ((Vector2) ref vector2).\u002Ector(Input.mousePosition.x, (float) Screen.height - Input.mousePosition.y);
-    if (ModMain.showClickGUI)
-    {
-      if (!Input.GetMouseButton(0))
-        this.dragging = false;
-      float timeScale = Time.timeScale;
-      Time.timeScale = 0.1f;
-      if ((double) vector2.x > (double) ((Rect) ref this.rect).position.x && (double) vector2.y > (double) ((Rect) ref this.rect).position.y && (double) vector2.x < (double) ((Rect) ref this.rect).position.x + (double) ((Rect) ref this.rect).width && (double) vector2.y < (double) ((Rect) ref this.rect).position.y + (double) ((Rect) ref this.rect).height && Input.GetMouseButtonDown(0))
-      {
-        this.offset = Vector2.op_Subtraction(((Rect) ref this.rect).position, vector2);
-        this.dragging = true;
-        Window window = this;
-        ModMain.cwm.wnds.Remove(this);
-        ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, window);
-      }
-      if (this.dragging)
-        ((Rect) ref this.rect).position = Vector2.op_Addition(vector2, this.offset);
-      if ((double) ((Rect) ref this.rect).x < 0.0)
-        ((Rect) ref this.rect).x = 0.0f;
-      if ((double) ((Rect) ref this.rect).y < 0.0)
-        ((Rect) ref this.rect).y = 0.0f;
-      if ((double) ((Rect) ref this.rect).x > (double) Screen.width - (double) ((Rect) ref this.rect).width)
-        ((Rect) ref this.rect).x = (float) Screen.width - ((Rect) ref this.rect).width;
-      if ((double) ((Rect) ref this.rect).y + (double) ((Rect) ref this.rectAct).height > (double) Screen.height)
-        ((Rect) ref this.rect).y = (float) Screen.height - ((Rect) ref this.rectAct).height;
-      Time.timeScale = timeScale;
-    }
-    this.OnUpdate();
-  }
+	// Token: 0x06000052 RID: 82 RVA: 0x00005218 File Offset: 0x00003418
+	public Rect AddRect(Rect rect1, Rect rect2)
+	{
+		return new Rect(rect1.x + rect2.x, rect1.y + rect2.y, rect1.width + rect2.width, rect1.height + rect2.height);
+	}
 
-  public Rect AddRect(Rect rect1, Rect rect2) => new Rect(((Rect) ref rect1).x + ((Rect) ref rect2).x, ((Rect) ref rect1).y + ((Rect) ref rect2).y, ((Rect) ref rect1).width + ((Rect) ref rect2).width, ((Rect) ref rect1).height + ((Rect) ref rect2).height);
+	// Token: 0x06000053 RID: 83 RVA: 0x0000526B File Offset: 0x0000346B
+	public virtual void OnSceneChanged(int buildIndex, string sceneName)
+	{
+	}
 
-  public virtual void OnSceneChanged(int buildIndex, string sceneName)
-  {
-  }
+	// Token: 0x04000028 RID: 40
+	public Rect rect = new Rect(50f, 20f, 230f * ModMain.scale, 50f * ModMain.scale);
+
+	// Token: 0x04000029 RID: 41
+	public Rect rectAct = new Rect(50f, 20f, 230f * ModMain.scale, 50f * ModMain.scale);
+
+	// Token: 0x0400002A RID: 42
+	public Vector2 offset;
+
+	// Token: 0x0400002B RID: 43
+	public bool dragging = false;
+
+	// Token: 0x0400002C RID: 44
+	public bool render = false;
+
+	// Token: 0x0400002D RID: 45
+	public string name = "Test Window :)";
+
+	// Token: 0x0400002E RID: 46
+	public List<Module> modules = new List<Module>();
 }

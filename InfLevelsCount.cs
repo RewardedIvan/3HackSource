@@ -1,20 +1,21 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: InfLevelsCount
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
+﻿using System;
 using ModuleType;
 using UnityEngine;
 
+// Token: 0x02000008 RID: 8
 public class InfLevelsCount : TextOption
 {
-  public InfLevelsCount()
-  {
-    this.name = nameof (InfLevelsCount);
-    this.text = PlayerPrefs.GetString(nameof (InfLevelsCount), "50");
-    this.numberOnly = true;
-  }
+	// Token: 0x0600000F RID: 15 RVA: 0x0000250A File Offset: 0x0000070A
+	public InfLevelsCount()
+	{
+		this.name = "InfLevelsCount";
+		this.text = PlayerPrefs.GetString("InfLevelsCount", "50");
+		this.numberOnly = true;
+	}
 
-  public override void Update() => PlayerPrefs.SetString(nameof (InfLevelsCount), this.text);
+	// Token: 0x06000010 RID: 16 RVA: 0x0000253B File Offset: 0x0000073B
+	public override void Update()
+	{
+		PlayerPrefs.SetString("InfLevelsCount", this.text);
+	}
 }

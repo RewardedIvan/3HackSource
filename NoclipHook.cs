@@ -1,68 +1,74 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: NoclipHook
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
-using HarmonyLib;
-using Modules;
-using System;
+﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
+using HarmonyLib;
+using Modules;
 using UnityEngine;
 
+// Token: 0x0200000F RID: 15
 public class NoclipHook
 {
-  public static int deathCount;
+	// Token: 0x0600001F RID: 31 RVA: 0x00002E40 File Offset: 0x00001040
+	public static void DoPatching()
+	{
+		// This is a mess
+		HarmonyLib.Harmony harmony = new HarmonyLib.Harmony("com.Explodingbill.NoclipPatch");
+		
+		MethodInfo methodInfo = AccessTools.Method(typeof(PlayerScript), "Die", null, null);
+        var postfix = new HarmonyMethod(typeof(NoclipHook).GetMethod("MyPostfix"));
+        harmony.Patch(original: methodInfo, postfix: postfix);
 
-  public static void DoPatching()
-  {
-    Harmony harmony = new Harmony("com.Explodingbill.NoclipPatch");
-    MethodInfo methodInfo1 = AccessTools.Method(typeof (PlayerScript), "Die", (Type[]) null, (Type[]) null);
-    // ISSUE: method reference
-    MethodInfo methodInfo2 = SymbolExtensions.GetMethodInfo(Expression.Lambda<Action>((Expression) Expression.Call((Expression) null, (MethodInfo) MethodBase.GetMethodFromHandle(__methodref (NoclipHook.MyPrefix)), Array.Empty<Expression>())));
-    // ISSUE: method reference
-    MethodInfo methodInfo3 = SymbolExtensions.GetMethodInfo(Expression.Lambda<Action>((Expression) Expression.Call((Expression) null, (MethodInfo) MethodBase.GetMethodFromHandle(__methodref (NoclipHook.MyPostfix)), Array.Empty<Expression>())));
-    harmony.Patch((MethodBase) methodInfo1, new HarmonyMethod(methodInfo2), new HarmonyMethod(methodInfo3), (HarmonyMethod) null, (HarmonyMethod) null, (HarmonyMethod) null);
-    MethodInfo methodInfo4 = AccessTools.Method(typeof (PlayerScript), "OnCollisionEnter", new Type[1]
-    {
-      typeof (Collision)
-    }, (Type[]) null);
-    // ISSUE: method reference
-    SymbolExtensions.GetMethodInfo(Expression.Lambda<Action>((Expression) Expression.Call((Expression) null, (MethodInfo) MethodBase.GetMethodFromHandle(__methodref (NoclipHook.MyPrefix)), Array.Empty<Expression>())));
-    MethodInfo methodInfo5 = SymbolExtensions.GetMethodInfo((Expression<Action>) (() => NoclipHook.OnCollisionEnter(default (Collision))));
-    harmony.Patch((MethodBase) methodInfo4, new HarmonyMethod(methodInfo2), new HarmonyMethod(methodInfo5), (HarmonyMethod) null, (HarmonyMethod) null, (HarmonyMethod) null);
-    MethodInfo methodInfo6 = AccessTools.Method(typeof (PlayerScript), "Win", (Type[]) null, (Type[]) null);
-    // ISSUE: method reference
-    MethodInfo methodInfo7 = SymbolExtensions.GetMethodInfo(Expression.Lambda<Action>((Expression) Expression.Call((Expression) null, (MethodInfo) MethodBase.GetMethodFromHandle(__methodref (NoclipHook.OnWin)), Array.Empty<Expression>())));
-    harmony.Patch((MethodBase) methodInfo6, new HarmonyMethod(methodInfo7), (HarmonyMethod) null, (HarmonyMethod) null, (HarmonyMethod) null, (HarmonyMethod) null);
-  }
+        MethodInfo methodInfo2 = AccessTools.Method(typeof(PlayerScript), "OnCollisionEnter", new Type[] { typeof(Collision) }, null);
+        var postfix2 = new HarmonyMethod(typeof(NoclipHook).GetMethod("OnCollisionEnter"));
+        harmony.Patch(original: methodInfo2, postfix: postfix2);
 
-  private static bool OnWin()
-  {
-    PlayerScript objectOfType = Object.FindObjectOfType<PlayerScript>();
-    if (!objectOfType.noDeath || Noclip.isNoclipEnabled)
-    {
-      objectOfType.dead = true;
-      ((Component) ((Component) objectOfType).transform.parent).gameObject.SetActive(false);
-      Object.Instantiate<GameObject>(objectOfType.WinFX, ((Component) objectOfType).transform.position, ((Component) objectOfType).transform.rotation);
-      Object.Instantiate<GameObject>(objectOfType.cam, objectOfType.cam.transform.position, objectOfType.cam.transform.rotation);
+		// This is defo the problem
+        MethodInfo methodInfo3 = AccessTools.Method(typeof(PlayerScript), "Win", null, null);
+        var prefix2 = new HarmonyMethod(typeof(NoclipHook).GetMethod("OnWin"));
+        harmony.Patch(original: methodInfo3, prefix: prefix2);
     }
-    return false;
-  }
 
-  public static void MyPrefix()
-  {
-  }
+	// Token: 0x06000020 RID: 32 RVA: 0x00002FE0 File Offset: 0x000011E0
+	public static bool OnWin()
+	{
+		PlayerScript playerScript = UnityEngine.Object.FindObjectOfType<PlayerScript>();
+		bool flag = !playerScript.noDeath || Noclip.isNoclipEnabled;
+		if (flag)
+		{
+			playerScript.dead = true;
+			playerScript.transform.parent.gameObject.SetActive(false);
+			UnityEngine.Object.Instantiate<GameObject>(playerScript.WinFX, playerScript.transform.position, playerScript.transform.rotation);
+			UnityEngine.Object.Instantiate<GameObject>(playerScript.cam, playerScript.cam.transform.position, playerScript.cam.transform.rotation);
+		}
+		return false;
+	}
 
-  public static void OnSceneChanged() => NoclipHook.deathCount = 0;
+	// Token: 0x06000022 RID: 34 RVA: 0x0000307E File Offset: 0x0000127E
+	public static void OnSceneChanged()
+	{
+		NoclipHook.deathCount = 0;
+	}
 
-  public static void MyPostfix() => ++NoclipHook.deathCount;
+	// Token: 0x06000023 RID: 35 RVA: 0x00003087 File Offset: 0x00001287
+	public static void MyPostfix()
+	{
+		NoclipHook.deathCount++;
+	}
 
-  public static void OnCollisionEnter(Collision other)
-  {
-    if (!BetterNoclip.isEnabled || !(other.gameObject.tag == "Hazard"))
-      return;
-    Object.Destroy((Object) other.collider);
-  }
+	// Token: 0x06000024 RID: 36 RVA: 0x00003098 File Offset: 0x00001298
+	public static void OnCollisionEnter(Collision other)
+	{
+		bool isEnabled = BetterNoclip.isEnabled;
+		if (isEnabled)
+		{
+			bool flag = other.gameObject.tag == "Hazard";
+			if (flag)
+			{
+				UnityEngine.Object.Destroy(other.collider);
+			}
+		}
+	}
+
+	// Token: 0x0400000C RID: 12
+	public static int deathCount;
 }

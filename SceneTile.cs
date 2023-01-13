@@ -1,36 +1,41 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: SceneTile
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Token: 0x02000003 RID: 3
 [Serializable]
 public class SceneTile
 {
-  public string SceneName;
-  public Vector2 spot;
-  public List<Vector2> positions = new List<Vector2>();
+	// Token: 0x06000005 RID: 5 RVA: 0x00002110 File Offset: 0x00000310
+	public SceneTile()
+	{
+		this.positions.Add(new Vector2(364f, 192f));
+		this.positions.Add(new Vector2(768f, 192f));
+		this.positions.Add(new Vector2(1172f, 192f));
+	}
 
-  public SceneTile()
-  {
-    this.positions.Add(new Vector2(364f, 192f));
-    this.positions.Add(new Vector2(768f, 192f));
-    this.positions.Add(new Vector2(1172f, 192f));
-  }
+	// Token: 0x06000006 RID: 6 RVA: 0x00002184 File Offset: 0x00000384
+	public void Draw(Vector2 selectedSpot)
+	{
+        Rect rect = new Rect(0f, 0f, 384f, (float)(Screen.height - 384));
+        rect.position = this.positions[(int)this.spot.x];
+		bool flag = this.spot == selectedSpot;
+		if (flag)
+		{
+			DrawUtils.DrawOutlinedRect(rect, DrawUtils.Accent(), 7f);
+		}
+		else
+		{
+			DrawUtils.DrawOutlinedRect(rect, Color.white, 4f);
+		}
+	}
 
-  public void Draw(Vector2 selectedSpot)
-  {
-    Rect position;
-    // ISSUE: explicit constructor call
-    ((Rect) ref position).\u002Ector(0.0f, 0.0f, 384f, (float) (Screen.height - 384));
-    ((Rect) ref position).position = this.positions[(int) this.spot.x];
-    if (Vector2.op_Equality(this.spot, selectedSpot))
-      DrawUtils.DrawOutlinedRect(position, DrawUtils.Accent(), 7f);
-    else
-      DrawUtils.DrawOutlinedRect(position, Color.white, 4f);
-  }
+	// Token: 0x04000002 RID: 2
+	public string SceneName;
+
+	// Token: 0x04000003 RID: 3
+	public Vector2 spot;
+
+	// Token: 0x04000004 RID: 4
+	public List<Vector2> positions = new List<Vector2>();
 }

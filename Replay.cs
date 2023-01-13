@@ -1,91 +1,133 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: Replay
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Token: 0x02000010 RID: 16
 public class Replay
 {
-  public static List<string> saves = new List<string>();
-  public int b;
-  public bool a = true;
-  public bool c = false;
+	// Token: 0x06000026 RID: 38 RVA: 0x000030E4 File Offset: 0x000012E4
+	public void Update()
+	{
+		bool keyDown = Input.GetKeyDown((KeyCode)116);
+		if (keyDown)
+		{
+			this.c = !this.c;
+		}
+		bool keyDown2 = Input.GetKeyDown((KeyCode)121);
+		if (keyDown2)
+		{
+			PathFollower.distanceTravelled = 0f;
+			this.a = !this.a;
+		}
+	}
 
-  public void Update()
-  {
-    if (Input.GetKeyDown((KeyCode) 116))
-      this.c = !this.c;
-    if (!Input.GetKeyDown((KeyCode) 121))
-      return;
-    PathFollower.distanceTravelled = 0.0f;
-    this.a = !this.a;
-  }
+	// Token: 0x06000027 RID: 39 RVA: 0x00003134 File Offset: 0x00001334
+	public void LateUpdate()
+	{
+		bool flag = this.c && !PauseMenuManager.paused;
+		if (flag)
+		{
+			bool flag2 = this.a;
+			if (flag2)
+			{
+				this.SaveState();
+			}
+			else
+			{
+				this.b++;
+				this.LoadState(Replay.saves[this.b]);
+			}
+		}
+	}
 
-  public void LateUpdate()
-  {
-    if (!this.c || PauseMenuManager.paused)
-      return;
-    if (this.a)
-    {
-      this.SaveState();
-    }
-    else
-    {
-      ++this.b;
-      this.LoadState(Replay.saves[this.b]);
-    }
-  }
+	// Token: 0x06000028 RID: 40 RVA: 0x0000319C File Offset: 0x0000139C
+	public void SaveState()
+	{
+		GameObject gameObject = GameObject.Find("Player");
+		string text = "";
+		string[] array = new string[7];
+		array[0] = text;
+		int num = 1;
+		Vector3 vector = gameObject.transform.position;
+		array[num] = vector.x.ToString();
+		array[2] = ":";
+		int num2 = 3;
+		vector = gameObject.transform.position;
+		array[num2] = vector.y.ToString();
+		array[4] = ":";
+		int num3 = 5;
+		vector = gameObject.transform.position;
+		array[num3] = vector.x.ToString();
+		array[6] = ":";
+		text = string.Concat(array);
+		for (int i = 0; i < gameObject.transform.childCount; i++)
+		{
+			string[] array2 = new string[7];
+			array2[0] = text;
+			int num4 = 1;
+			vector = gameObject.transform.GetChild(i).position;
+			array2[num4] = vector.x.ToString();
+			array2[2] = ":";
+			int num5 = 3;
+			vector = gameObject.transform.GetChild(i).position;
+			array2[num5] = vector.y.ToString();
+			array2[4] = ":";
+			int num6 = 5;
+			vector = gameObject.transform.GetChild(i).position;
+			array2[num6] = vector.x.ToString();
+			array2[6] = ":";
+			text = string.Concat(array2);
+			for (int j = 0; j < gameObject.transform.GetChild(i).childCount; j++)
+			{
+				string[] array3 = new string[7];
+				array3[0] = text;
+				int num7 = 1;
+				vector = gameObject.transform.GetChild(i).GetChild(j).position;
+				array3[num7] = vector.x.ToString();
+				array3[2] = ":";
+				int num8 = 3;
+				vector = gameObject.transform.GetChild(i).GetChild(j).position;
+				array3[num8] = vector.y.ToString();
+				array3[4] = ":";
+				int num9 = 5;
+				vector = gameObject.transform.GetChild(i).GetChild(j).position;
+				array3[num9] = vector.x.ToString();
+				array3[6] = ":";
+				text = string.Concat(array3);
+			}
+		}
+		Replay.saves.Add(text);
+		Debug.Log("BBBBBB");
+	}
 
-  public void SaveState()
-  {
-    GameObject gameObject = GameObject.Find("Player");
-    string str = "" + gameObject.transform.position.x.ToString() + ":" + gameObject.transform.position.y.ToString() + ":" + gameObject.transform.position.x.ToString() + ":";
-    for (int index1 = 0; index1 < gameObject.transform.childCount; ++index1)
-    {
-      str = str + gameObject.transform.GetChild(index1).position.x.ToString() + ":" + gameObject.transform.GetChild(index1).position.y.ToString() + ":" + gameObject.transform.GetChild(index1).position.x.ToString() + ":";
-      for (int index2 = 0; index2 < gameObject.transform.GetChild(index1).childCount; ++index2)
-      {
-        string[] strArray = new string[7]
-        {
-          str,
-          gameObject.transform.GetChild(index1).GetChild(index2).position.x.ToString(),
-          ":",
-          null,
-          null,
-          null,
-          null
-        };
-        Vector3 position = gameObject.transform.GetChild(index1).GetChild(index2).position;
-        strArray[3] = position.y.ToString();
-        strArray[4] = ":";
-        position = gameObject.transform.GetChild(index1).GetChild(index2).position;
-        strArray[5] = position.x.ToString();
-        strArray[6] = ":";
-        str = string.Concat(strArray);
-      }
-    }
-    Replay.saves.Add(str);
-    Debug.Log((object) "BBBBBB");
-  }
+	// Token: 0x06000029 RID: 41 RVA: 0x000033C8 File Offset: 0x000015C8
+	public void LoadState(string str)
+	{
+		GameObject gameObject = GameObject.Find("Player");
+		string[] array = str.Split(":".ToCharArray());
+		int num = 0;
+		for (int i = 0; i < gameObject.transform.childCount; i++)
+		{
+			num += 3;
+			gameObject.transform.GetChild(i).position = new Vector3(float.Parse(array[num]), float.Parse(array[num + 1]), float.Parse(array[num + 2]));
+			for (int j = 0; j < gameObject.transform.GetChild(i).childCount; j++)
+			{
+				num += 3;
+				gameObject.transform.GetChild(i).GetChild(j).position = new Vector3(float.Parse(array[num]), float.Parse(array[num + 1]), float.Parse(array[num + 2]));
+			}
+		}
+		Debug.Log("AAAAAA");
+	}
 
-  public void LoadState(string str)
-  {
-    GameObject gameObject = GameObject.Find("Player");
-    string[] strArray = str.Split(":".ToCharArray());
-    int index1 = 0;
-    for (int index2 = 0; index2 < gameObject.transform.childCount; ++index2)
-    {
-      index1 += 3;
-      gameObject.transform.GetChild(index2).position = new Vector3(float.Parse(strArray[index1]), float.Parse(strArray[index1 + 1]), float.Parse(strArray[index1 + 2]));
-      for (int index3 = 0; index3 < gameObject.transform.GetChild(index2).childCount; ++index3)
-      {
-        index1 += 3;
-        gameObject.transform.GetChild(index2).GetChild(index3).position = new Vector3(float.Parse(strArray[index1]), float.Parse(strArray[index1 + 1]), float.Parse(strArray[index1 + 2]));
-      }
-    }
-    Debug.Log((object) "AAAAAA");
-  }
+	// Token: 0x0400000D RID: 13
+	public static List<string> saves = new List<string>();
+
+	// Token: 0x0400000E RID: 14
+	public int b;
+
+	// Token: 0x0400000F RID: 15
+	public bool a = true;
+
+	// Token: 0x04000010 RID: 16
+	public bool c = false;
 }

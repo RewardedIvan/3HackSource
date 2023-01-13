@@ -1,112 +1,171 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: ModMain
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
+﻿using System;
+using System.Collections.Generic;
 using MelonLoader;
 using Modules;
-using System;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+// Token: 0x02000013 RID: 19
 public class ModMain : MelonMod
 {
-  public static bool initializedFonts;
-  public static List<TMP_FontAsset> fonts = new List<TMP_FontAsset>();
-  public static Camera camera;
-  public static float scale = 0.5f;
-  public Rect windowRect = new Rect(20f, 20f, 230f * ModMain.scale, 50f * ModMain.scale);
-  public static ClientWindowManager cwm = new ClientWindowManager();
-  public static Scene_Switcher scs = new Scene_Switcher();
-  public static bool showClickGUI;
-  public static KeyCode clickGUIKeyCode = (KeyCode) 303;
+	// Token: 0x06000034 RID: 52 RVA: 0x00003F34 File Offset: 0x00002134
+	public override void OnApplicationStart()
+	{
+		AttemptCounter.Initialize();
+		NoclipHook.DoPatching();
+		_DiscordRPC.Initialize();
+		try
+		{
+			Save.LoadFromFile();
+		}
+		catch (Exception ex)
+		{
+			Debug.Log(ex.Message);
+		}
+	}
 
-  public virtual void OnApplicationStart()
-  {
-    AttemptCounter.Initialize();
-    NoclipHook.DoPatching();
-    _DiscordRPC.Initialize();
-    try
-    {
-      Save.LoadFromFile();
-    }
-    catch (Exception ex)
-    {
-      Debug.Log((object) ex.Message);
-    }
-  }
+	// Token: 0x06000035 RID: 53 RVA: 0x00003F80 File Offset: 0x00002180
+	public override void OnApplicationQuit()
+	{
+		Save.SaveToFile();
+	}
 
-  public virtual void OnApplicationQuit() => Save.SaveToFile();
+	// Token: 0x06000036 RID: 54 RVA: 0x00003F8C File Offset: 0x0000218C
+	public override void OnUpdate()
+	{
+		bool keyDown = Input.GetKeyDown((KeyCode)303);
+		if (keyDown)
+		{
+			PlayerPrefs.SetString("Tutorial", "FOSS f2w");
+            // Join us now and share the software;
+            // You'll be free, hackers, you'll be free
+            // Join us now and share the software;
+            // You'll be free, hackers, you'll be free
 
-  public virtual void OnUpdate()
-  {
-    if (Input.GetKeyDown((KeyCode) 303))
-      PlayerPrefs.SetString("Tutorial", "Stop digging into the code you dirty bubby killer ;)");
-    StatusMGR.Update();
-    if (Input.GetKeyDown(ModMain.clickGUIKeyCode))
-      ModMain.showClickGUI = !ModMain.showClickGUI;
-    ModMain.cwm.Update();
-  }
+            // Hoarders can get piles of money
+            // That is true, hackers, that is true
+            // But they cannot help their neighbors;
+            // That's not good, hackers, that's not good
 
-  public virtual void OnLateUpdate() => ModMain.cwm.LateUpdate();
+            // When we have enough free software
+            // At our call, hackers, at our call
+            // We'll kick out those dirty licenses
+            // Ever more, hackers, ever more
 
-  public virtual void OnSceneWasLoaded(int buildIndex, string sceneName)
-  {
-    if (!ModMain.initializedFonts)
-    {
-      ModMain.initializedFonts = true;
-      foreach (TextMeshProUGUI textMeshProUgui in Object.FindObjectsOfType<TextMeshProUGUI>())
-      {
-        if (!ModMain.fonts.Contains(((TMP_Text) textMeshProUgui).font))
-          ModMain.fonts.Add(((TMP_Text) textMeshProUgui).font);
-      }
-      StatusMGR.Init();
-    }
-    StatusMGR.OnSceneChanged(buildIndex, sceneName);
-    NoclipHook.OnSceneChanged();
-    ModMain.camera = Object.FindObjectOfType<Camera>();
-    _DiscordRPC.UpdatePresence(sceneName);
-    PauseMenuManager.paused = false;
-    ModMain.cwm.OnSceneChanged(buildIndex, sceneName);
-    if (sceneName == "Menu")
-    {
-      TextMeshProUGUI component1 = GameObject.Find("Version Text").GetComponent<TextMeshProUGUI>();
-      ((TMP_Text) component1).text = ((TMP_Text) component1).text + " (Modded by Explodingbill)";
-      RectTransform component2 = GameObject.Find("Version Text").GetComponent<RectTransform>();
-      component2.sizeDelta = Vector2.op_Addition(component2.sizeDelta, new Vector2(500f, 0.0f));
-      RectTransform component3 = GameObject.Find("Version Text").GetComponent<RectTransform>();
-      component3.anchoredPosition = Vector2.op_Addition(component3.anchoredPosition, new Vector2(250f, 0.0f));
-    }
-    ShowAttemptCount.CreateText();
-  }
+            // Join us now and share the software;
+            // You'll be free, hackers, you'll be free
+            // Join us now and share the software;
+            // You'll be free, hackers, you'll be free
+        }
+		StatusMGR.Update();
+		bool keyDown2 = Input.GetKeyDown(ModMain.clickGUIKeyCode);
+		if (keyDown2)
+		{
+			ModMain.showClickGUI = !ModMain.showClickGUI;
+		}
+		ModMain.cwm.Update();
+	}
 
-  public virtual void OnGUI()
-  {
-    DrawUtils.Update();
-    if (Keybinds.editing)
-      DrawUtils.DrawRect(new Rect(0.0f, 0.0f, (float) Screen.width, (float) Screen.height), new Color(0.0f, 0.0f, 0.0f, 0.75f));
-    GUI.skin.textArea.fontSize = Mathf.RoundToInt(32f * ModMain.scale);
-    ModMain.cwm.Draw();
-    if (Keybinds.editing)
-    {
-      string str = "None Selected\n";
-      if (Keybinds.module != null)
-        str = Keybinds.module.name + " Selected\n";
-      GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
-      GUI.skin.label.alignment = (TextAnchor) 8;
-      DrawUtils.DrawText(new Rect((float) (Screen.width - 20 - 500), (float) (Screen.height - 20 - 300), 500f, 300f), str + "Press Escape To Stop Editing\nPress Backspace To Reset Keybind\nRight-Click On A Module To Select It", DrawUtils.Accent());
-      GUI.skin.label.fontSize = Mathf.RoundToInt(32f * ModMain.scale);
-    }
-    if (PlayerPrefs.HasKey("Tutorial"))
-      return;
-    Rect position;
-    // ISSUE: explicit constructor call
-    ((Rect) ref position).\u002Ector(10f, (float) (Screen.height / 2), 310f, 60f);
-    GUI.skin.label.fontSize = Mathf.RoundToInt(32f * ModMain.scale);
-    GUI.skin.label.alignment = (TextAnchor) 3;
-    DrawUtils.DrawRect(position, new Color(0.0f, 0.0f, 0.0f, 0.35f));
-    DrawUtils.DrawText(position, " Press Right-Shift to open GUI\n (This can be rebinded in the keybinds menu)", DrawUtils.Accent());
-  }
+	// Token: 0x06000037 RID: 55 RVA: 0x00003FE8 File Offset: 0x000021E8
+	public override void OnLateUpdate()
+	{
+		ModMain.cwm.LateUpdate();
+	}
+
+	// Token: 0x06000038 RID: 56 RVA: 0x00003FF8 File Offset: 0x000021F8
+	public override void OnSceneWasLoaded(int buildIndex, string sceneName)
+	{
+		bool flag = !ModMain.initializedFonts;
+		if (flag)
+		{
+			ModMain.initializedFonts = true;
+			foreach (TextMeshProUGUI textMeshProUGUI in UnityEngine.Object.FindObjectsOfType<TextMeshProUGUI>())
+			{
+				bool flag2 = !ModMain.fonts.Contains(textMeshProUGUI.font);
+				if (flag2)
+				{
+					ModMain.fonts.Add(textMeshProUGUI.font);
+				}
+			}
+			StatusMGR.Init();
+		}
+		StatusMGR.OnSceneChanged(buildIndex, sceneName);
+		NoclipHook.OnSceneChanged();
+		ModMain.camera = UnityEngine.Object.FindObjectOfType<Camera>();
+		_DiscordRPC.UpdatePresence(sceneName);
+		PauseMenuManager.paused = false;
+		ModMain.cwm.OnSceneChanged(buildIndex, sceneName);
+		bool flag3 = sceneName == "Menu";
+		if (flag3)
+		{
+			TextMeshProUGUI component = GameObject.Find("Version Text").GetComponent<TextMeshProUGUI>();
+			component.text += " (Modded by Explodingbill + RewardedIvan)";
+			GameObject.Find("Version Text").GetComponent<RectTransform>().sizeDelta += new Vector2(500f, 0f);
+			GameObject.Find("Version Text").GetComponent<RectTransform>().anchoredPosition += new Vector2(250f, 0f);
+		}
+		ShowAttemptCount.CreateText();
+	}
+
+	// Token: 0x06000039 RID: 57 RVA: 0x00004138 File Offset: 0x00002338
+	public override void OnGUI()
+	{
+		DrawUtils.Update();
+		bool editing = Keybinds.editing;
+		if (editing)
+		{
+			DrawUtils.DrawRect(new Rect(0f, 0f, (float)Screen.width, (float)Screen.height), new Color(0f, 0f, 0f, 0.75f));
+		}
+		GUI.skin.textArea.fontSize = Mathf.RoundToInt(32f * ModMain.scale);
+		ModMain.cwm.Draw();
+		bool editing2 = Keybinds.editing;
+		if (editing2)
+		{
+			string text = "None Selected\n";
+			bool flag = Keybinds.module != null;
+			if (flag)
+			{
+				text = Keybinds.module.name + " Selected\n";
+			}
+			GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
+			GUI.skin.label.alignment = (TextAnchor)8;
+			DrawUtils.DrawText(new Rect((float)(Screen.width - 20 - 500), (float)(Screen.height - 20 - 300), 500f, 300f), text + "Press Escape To Stop Editing\nPress Backspace To Reset Keybind\nRight-Click On A Module To Select It", DrawUtils.Accent());
+			GUI.skin.label.fontSize = Mathf.RoundToInt(32f * ModMain.scale);
+		}
+		bool flag2 = !PlayerPrefs.HasKey("Tutorial");
+		if (flag2)
+		{
+            Rect rect = new Rect(10f, (float)(Screen.height / 2), 310f, 60f);
+			GUI.skin.label.fontSize = Mathf.RoundToInt(32f * ModMain.scale);
+			GUI.skin.label.alignment = (TextAnchor)3;
+			DrawUtils.DrawRect(rect, new Color(0f, 0f, 0f, 0.35f));
+			DrawUtils.DrawText(rect, " Press Right-Shift to open GUI\n (This can be rebinded in the keybinds menu)", DrawUtils.Accent());
+		}
+	}
+
+	// Token: 0x04000018 RID: 24
+	public static bool initializedFonts;
+
+	// Token: 0x04000019 RID: 25
+	public static List<TMP_FontAsset> fonts = new List<TMP_FontAsset>();
+
+	// Token: 0x0400001A RID: 26
+	public static Camera camera;
+
+	// Token: 0x0400001B RID: 27
+	public static float scale = 0.5f;
+
+	// Token: 0x0400001C RID: 28
+	public Rect windowRect = new Rect(20f, 20f, 230f * ModMain.scale, 50f * ModMain.scale);
+
+	// Token: 0x0400001D RID: 29
+	public static ClientWindowManager cwm = new ClientWindowManager();
+
+	// Token: 0x0400001E RID: 30
+	public static Scene_Switcher scs = new Scene_Switcher();
+
+	// Token: 0x0400001F RID: 31
+	public static bool showClickGUI;
+
+	// Token: 0x04000020 RID: 32
+	public static KeyCode clickGUIKeyCode = (KeyCode)303;
 }

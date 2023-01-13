@@ -1,26 +1,32 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: SpeedhackMusic
-// Assembly: Hacks, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7044930E-2DB6-478E-8870-F3754E75DBEE
-// Assembly location: C:\Users\Rewar\Desktop\3Dash Windows v1.2\Mods\Hacks.dll
-
+﻿using System;
 using UnityEngine;
 
+// Token: 0x0200000B RID: 11
 public class SpeedhackMusic : Module
 {
-  public SpeedhackMusic() => this.name = "Speed Music";
+	// Token: 0x06000015 RID: 21 RVA: 0x00002622 File Offset: 0x00000822
+	public SpeedhackMusic()
+	{
+		this.name = "Speed Music";
+	}
 
-  public override void Update()
-  {
-    if (this.enabled && SpeedhackButton.isEnabled)
-    {
-      foreach (AudioSource audioSource in Object.FindObjectsOfType<AudioSource>())
-        audioSource.pitch = float.Parse(PlayerPrefs.GetString("SpeedhackValue", "1"));
-    }
-    else
-    {
-      foreach (AudioSource audioSource in Object.FindObjectsOfType<AudioSource>())
-        audioSource.pitch = 1f;
-    }
-  }
+	// Token: 0x06000016 RID: 22 RVA: 0x00002638 File Offset: 0x00000838
+	public override void Update()
+	{
+		bool flag = this.enabled && SpeedhackButton.isEnabled;
+		if (flag)
+		{
+			foreach (AudioSource audioSource in UnityEngine.Object.FindObjectsOfType<AudioSource>())
+			{
+				audioSource.pitch = float.Parse(PlayerPrefs.GetString("SpeedhackValue", "1"));
+			}
+		}
+		else
+		{
+			foreach (AudioSource audioSource2 in UnityEngine.Object.FindObjectsOfType<AudioSource>())
+			{
+				audioSource2.pitch = 1f;
+			}
+		}
+	}
 }
