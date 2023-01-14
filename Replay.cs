@@ -97,7 +97,7 @@ public class Replay
 			}
 		}
 		Replay.saves.Add(text);
-		Debug.Log("BBBBBB");
+		// Debug.Log("BBBBBB");
 	}
 
 	// Token: 0x06000029 RID: 41 RVA: 0x000033C8 File Offset: 0x000015C8
@@ -116,7 +116,7 @@ public class Replay
 				gameObject.transform.GetChild(i).GetChild(j).position = new Vector3(float.Parse(array[num]), float.Parse(array[num + 1]), float.Parse(array[num + 2]));
 			}
 		}
-		Debug.Log("AAAAAA");
+		//Debug.Log("AAAAAA");
 	}
 
 	// Token: 0x0400000D RID: 13

@@ -17,8 +17,7 @@ namespace Modules
 		{
 			foreach (Window window in ModMain.cwm.wnds)
 			{
-				bool flag = window.name.StartsWith("Options");
-				if (flag)
+				if (window.name.StartsWith("Options"))
 				{
 					window.render = this.enabled;
 				}

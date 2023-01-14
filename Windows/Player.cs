@@ -18,6 +18,7 @@ namespace Windows
 			this.modules.Add(new InstantComplete());
 			this.modules.Add(new FlipGravity());
 			this.modules.Add(new ShowAttemptCount());
+			this.modules.Add(new ShowHitbox());
 		}
 	}
 }

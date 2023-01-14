@@ -20,7 +20,7 @@ public class ModMain : MelonMod
 		}
 		catch (Exception ex)
 		{
-			Debug.Log(ex.Message);
+			Console.Write(ex.Message);
 		}
 	}
 
@@ -151,11 +151,13 @@ public class ModMain : MelonMod
 	// Token: 0x0400001A RID: 26
 	public static Camera camera;
 
-	// Token: 0x0400001B RID: 27
-	public static float scale = 0.5f;
+    // Token: 0x0400001B RID: 27
+    public static float scale = 0.7f;
+	public static float spacing = 45f;
+	public static float windowwidth = 230f;
 
-	// Token: 0x0400001C RID: 28
-	public Rect windowRect = new Rect(20f, 20f, 230f * ModMain.scale, 50f * ModMain.scale);
+    // Token: 0x0400001C RID: 28
+    public Rect windowRect = new Rect(20f, 20f, 230f * ModMain.scale, 50f * ModMain.scale);
 
 	// Token: 0x0400001D RID: 29
 	public static ClientWindowManager cwm = new ClientWindowManager();

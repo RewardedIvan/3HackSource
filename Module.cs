@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.InteropServices;
 using Modules;
 using UnityEngine;
 using Windows;
@@ -33,8 +35,7 @@ public class Module
         Vector2 vector = new Vector2(Input.mousePosition.x, (float)Screen.height - Input.mousePosition.y);
         UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleCenter;
         UnityEngine.GUI.skin.label.fontSize = Mathf.RoundToInt(23f * ModMain.scale);
-        bool flag = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-		if (flag)
+		if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 		{
 			bool mouseButton = Input.GetMouseButton(0);
 			if (mouseButton)
@@ -50,67 +51,112 @@ public class Module
 		{
 			DrawUtils.DrawRect(rect, new Color(0.14117648f, 0.14117648f, 0.14117648f));
 		}
-		bool flag2 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-		if (flag2)
+		if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 		{
 			Event current = Event.current;
-			bool flag3 = current.button == 0 && current.type == 0;
-			if (flag3)
+			if (current.button == 0 && current.type == 0)
 			{
 				ModMain.cwm.wnds.Remove(wnd);
 				ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, wnd);
 				this.enabled = !this.enabled;
 				this.OnClick();
 			}
-			bool flag4 = current.button == 1 && Keybinds.editing;
-			if (flag4)
+			if (current.button == 1 && Keybinds.editing)
 			{
 				ModMain.cwm.wnds.Remove(wnd);
 				ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, wnd);
 				Keybinds.module = this;
 			}
-			bool flag5 = current.button == 1 && !Keybinds.editing;
-			if (flag5)
+			if (current.button == 1 && !Keybinds.editing)
 			{
 				ModMain.cwm.wnds.Remove(wnd);
 				ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, wnd);
 				Options.module = this;
 			}
 		}
-		bool flag6 = this.enabled;
-		if (flag6)
+		string pp = PlayerPrefs.GetString("SearchValue");
+        if (pp.Length != 0)
 		{
-			DrawUtils.DrawText(rect, this.name, DrawUtils.Accent());
-			bool flag7 = this.keybind > 0;
-			if (flag7)
+			if (this.name.ToLower().Contains(pp.ToLower()))
 			{
-                UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
-                DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", DrawUtils.Accent());
-			}
-		}
-		else
+                if (this.enabled)
+                {
+                    DrawUtils.DrawText(rect, this.name, DrawUtils.Accent());
+                    if (this.keybind > 0)
+                    {
+                        UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
+                        DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", DrawUtils.Accent());
+                    }
+                }
+                else
+                {
+                    DrawUtils.DrawText(rect, this.name, Color.white);
+                    if (this.keybind > 0)
+                    {
+                        UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
+                        DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", Color.white);
+                    }
+                }
+            } else
+			{
+				Color ac = DrawUtils.Accent();
+
+                if (this.enabled)
+                {
+					ac.a = 0.3f;
+                    DrawUtils.DrawText(rect, this.name, ac);
+                    if (this.keybind > 0)
+                    {
+						ac.a += 0.1f;
+                        UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
+                        DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", ac);
+                    }
+                }
+                else
+                {
+                    ac.a = 0.1f;
+                    DrawUtils.DrawText(rect, this.name, ac);
+                    if (this.keybind > 0)
+                    {
+						ac.a += 0.1f;
+                        UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
+                        DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", ac);
+                    }
+                }
+            }
+		} else
 		{
-			DrawUtils.DrawText(rect, this.name, Color.white);
-			bool flag8 = this.keybind > 0;
-			if (flag8)
-			{
-                UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
-				DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", Color.white);
-			}
-		}
+            if (this.enabled)
+            {
+                DrawUtils.DrawText(rect, this.name, DrawUtils.Accent());
+                if (this.keybind > 0)
+                {
+                    UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
+                    DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", DrawUtils.Accent());
+                }
+            }
+            else
+            {
+                DrawUtils.DrawText(rect, this.name, Color.white);
+                if (this.keybind > 0)
+                {
+                    UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
+                    DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", Color.white);
+                }
+            }
+        }
+		
         UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
 		try
 		{
-			bool flag9 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-			if (flag9)
+			if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 			{
-				bool flag10 = this.description != "";
-				if (flag10)
+				if (this.description != "")
 				{
-                    UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleRight;
-					DrawUtils.DrawRect(new Rect(10f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.25f));
+                    UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleLeft;
+					DrawUtils.DrawRect(new Rect(10f, Screen.height - 10 - 40f * ModMain.scale * 2f, 60 * this.description.Length, 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.7f));
                     UnityEngine.GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
-					DrawUtils.DrawText(new Rect(15f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), this.description, Color.white);
+					DrawUtils.DrawText(new Rect(15f, Screen.height - 10 - 40f * ModMain.scale * 2f, 60 * this.description.Length, 80f * ModMain.scale), this.description, Color.white);
 				}
 			}
 		}

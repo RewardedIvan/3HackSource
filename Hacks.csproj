@@ -41,6 +41,10 @@
     <Reference Include="UnityEngine.AnimationModule" />
     <Reference Include="UnityEngine.AudioModule" />
     <Reference Include="UnityEngine.CoreModule" />
+    <Reference Include="UnityEngine.ImageConversionModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\UnityEngine.ImageConversionModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.IMGUIModule" />
     <Reference Include="UnityEngine.InputLegacyModule" />
     <Reference Include="UnityEngine.PhysicsModule" />
@@ -85,6 +89,7 @@
     <Compile Include="Modules\OptionsModule.cs" />
     <Compile Include="Modules\PlayerModule.cs" />
     <Compile Include="Modules\PracticeMusic.cs" />
+    <Compile Include="Modules\Quit.cs" />
     <Compile Include="Modules\ReplayMode.cs" />
     <Compile Include="Modules\ReplayModule.cs" />
     <Compile Include="Modules\ReplaySave.cs" />
@@ -134,8 +139,10 @@
     <Compile Include="Windows\Options.cs" />
     <Compile Include="Windows\Player.cs" />
     <Compile Include="Windows\Replay.cs" />
+    <Compile Include="Windows\Server.cs" />
     <Compile Include="Windows\Speedhack.cs" />
     <Compile Include="Windows\Status.cs" />
+    <Compile Include="Windows\Windows.cs" />
     <Compile Include="Windows\World.cs" />
     <Compile Include="_DiscordRPC.cs" />
   </ItemGroup>
@@ -148,6 +155,7 @@
     <Content Include="UnityEngine.AnimationModule.dll" />
     <Content Include="UnityEngine.AudioModule.dll" />
     <Content Include="UnityEngine.CoreModule.dll" />
+    <Content Include="UnityEngine.ImageConversionModule.dll" />
     <Content Include="UnityEngine.IMGUIModule.dll" />
     <Content Include="UnityEngine.InputLegacyModule.dll" />
     <Content Include="UnityEngine.PhysicsModule.dll" />

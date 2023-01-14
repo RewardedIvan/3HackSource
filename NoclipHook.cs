@@ -11,7 +11,7 @@ public class NoclipHook
 	// Token: 0x0600001F RID: 31 RVA: 0x00002E40 File Offset: 0x00001040
 	public static void DoPatching()
 	{
-		// This is a mess
+		// This had me banging against the wall for multiple hours
 		HarmonyLib.Harmony harmony = new HarmonyLib.Harmony("com.Explodingbill.NoclipPatch");
 		
 		MethodInfo methodInfo = AccessTools.Method(typeof(PlayerScript), "Die", null, null);
@@ -22,7 +22,6 @@ public class NoclipHook
         var postfix2 = new HarmonyMethod(typeof(NoclipHook).GetMethod("OnCollisionEnter"));
         harmony.Patch(original: methodInfo2, postfix: postfix2);
 
-		// This is defo the problem
         MethodInfo methodInfo3 = AccessTools.Method(typeof(PlayerScript), "Win", null, null);
         var prefix2 = new HarmonyMethod(typeof(NoclipHook).GetMethod("OnWin"));
         harmony.Patch(original: methodInfo3, prefix: prefix2);

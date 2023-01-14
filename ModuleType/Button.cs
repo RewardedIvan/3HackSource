@@ -60,64 +60,113 @@ namespace ModuleType
 			{
 				DrawUtils.DrawRect(rect, new Color(0.14117648f, 0.14117648f, 0.14117648f));
 			}
-			bool flag3 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-			if (flag3)
+			if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 			{
 				Event current = Event.current;
-				bool flag4 = current.button == 0 && current.type == 0;
-				if (flag4)
+				if (current.button == 0 && current.type == 0)
 				{
-					bool flag5 = this.canClick;
-					if (flag5)
+					if (this.canClick)
 					{
 						this.OnClick();
 					}
 					ModMain.cwm.wnds.Remove(wnd);
 					ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, wnd);
 				}
-				bool flag6 = current.button == 1 && Keybinds.editing;
-				if (flag6)
+				if (current.button == 1 && Keybinds.editing)
 				{
 					ModMain.cwm.wnds.Remove(wnd);
 					ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, wnd);
 					Keybinds.module = this;
 				}
 			}
-			bool enabled2 = this.enabled;
-			if (enabled2)
+
+            string pp = PlayerPrefs.GetString("SearchValue");
+			if (pp.Length != 0)
 			{
-				DrawUtils.DrawText(rect, this.name, DrawUtils.Accent());
-				bool flag7 = this.keybind > 0;
-				if (flag7)
+				if (this.name.ToLower().Contains(pp.ToLower()))
 				{
-					GUI.skin.label.alignment = (TextAnchor)5;
-					DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", DrawUtils.Accent());
-				}
-			}
-			else
+                    if (this.enabled)
+                    {
+                        DrawUtils.DrawText(rect, this.name, DrawUtils.Accent());
+                        bool flag7 = this.keybind > 0;
+                        if (flag7)
+                        {
+                            GUI.skin.label.alignment = (TextAnchor)5;
+                            DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", DrawUtils.Accent());
+                        }
+                    }
+                    else
+                    {
+                        DrawUtils.DrawText(rect, this.name, Color.white);
+                        if (this.keybind > 0)
+                        {
+                            GUI.skin.label.alignment = (TextAnchor)5;
+                            DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", Color.white);
+                        }
+                    }
+                } else
+				{
+					Color ac = DrawUtils.Accent();
+
+                    if (this.enabled)
+                    {
+						ac.a = 0.3f;
+                        DrawUtils.DrawText(rect, this.name, ac);
+                        if (this.keybind > 0)
+                        {
+							ac.a += 0.1f;
+                            GUI.skin.label.alignment = (TextAnchor)5;
+                            DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", ac);
+                        }
+                    }
+                    else
+                    {
+						ac.a = 0.1f;
+                        DrawUtils.DrawText(rect, this.name, ac);
+                        if (this.keybind > 0)
+                        {
+							ac.a += 0.1f;
+                            GUI.skin.label.alignment = (TextAnchor)5;
+                            DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", ac);
+                        }
+                    }
+                }
+			} else
 			{
-				DrawUtils.DrawText(rect, this.name, Color.white);
-				bool flag8 = this.keybind > 0;
-				if (flag8)
-				{
-					GUI.skin.label.alignment = (TextAnchor)5;
-					DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", Color.white);
-				}
-			}
+                if (this.enabled)
+                {
+                    DrawUtils.DrawText(rect, this.name, DrawUtils.Accent());
+                    bool flag7 = this.keybind > 0;
+                    if (flag7)
+                    {
+                        GUI.skin.label.alignment = (TextAnchor)5;
+                        DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", DrawUtils.Accent());
+                    }
+                }
+                else
+                {
+                    DrawUtils.DrawText(rect, this.name, Color.white);
+                    if (this.keybind > 0)
+                    {
+                        GUI.skin.label.alignment = (TextAnchor)5;
+                        DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", Color.white);
+                    }
+                }
+            }
+			
 			GUI.skin.label.alignment = (TextAnchor)4;
 			try
 			{
 				bool flag9 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
 				if (flag9)
 				{
-					bool flag10 = this.description != "";
-					if (flag10)
+					if (this.description != "")
 					{
-						GUI.skin.label.alignment = (TextAnchor)3;
-						DrawUtils.DrawRect(new Rect(10f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.25f));
-						GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
-						DrawUtils.DrawText(new Rect(15f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), this.description, Color.white);
-					}
+                        UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleLeft;
+                        DrawUtils.DrawRect(new Rect(10f, Screen.height - 10 - 40f * ModMain.scale * 2f, 60 * this.description.Length, 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.7f));
+                        UnityEngine.GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
+                        DrawUtils.DrawText(new Rect(15f, Screen.height - 10 - 40f * ModMain.scale * 2f, 60 * this.description.Length, 80f * ModMain.scale), this.description, Color.white);
+                    }
 				}
 			}
 			catch (Exception)

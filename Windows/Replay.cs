@@ -96,7 +96,7 @@ namespace Windows
 				{
 					Replay.inputCheck.Add(bool.Parse(text2));
 				}
-				UnityEngine.Debug.Log(Replay.inputCheck);
+				// UnityEngine.Debug.Log(Replay.inputCheck);
 			}
 			Replay.frame = 0;
 			Replay.scene = sceneName;

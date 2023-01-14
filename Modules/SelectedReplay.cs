@@ -33,7 +33,7 @@ namespace Modules
 			}
 			foreach (string text2 in Directory.GetFiles(text))
 			{
-				Debug.Log(Path.GetExtension(text2));
+				// Debug.Log(Path.GetExtension(text2));
 				bool flag4 = Path.GetExtension(text2) == ".replay";
 				if (flag4)
 				{

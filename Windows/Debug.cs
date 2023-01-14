@@ -14,8 +14,8 @@ namespace Windows
 			this.name = "Debug";
 		}
 
-		// Token: 0x0600005F RID: 95 RVA: 0x0000574C File Offset: 0x0000394C
-		public override void Draw()
+        // Token: 0x0600005F RID: 95 RVA: 0x0000574C File Offset: 0x0000394C
+        public override void Draw()
 		{
 			UnityEngine.GUI.skin.label.alignment = (TextAnchor)4;
             UnityEngine.GUI.skin.label.fontSize = Mathf.RoundToInt(23f * ModMain.scale);

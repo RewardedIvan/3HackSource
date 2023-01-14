@@ -17,42 +17,47 @@ namespace Windows
 			this.modules.Add(new Module
 			{
 				name = "FPS",
-				description = "Right click to change the side on the screen"
+				description = "Amount of Frames Per Second"
 			});
 			this.modules.Add(new Module
 			{
 				name = "Accuracy",
-				description = "Right click to change the side on the screen"
-			});
+				description = "How accurately you've played with noclip"
+            });
 			this.modules.Add(new Module
 			{
 				name = "Deaths",
-				description = "Right click to change the side on the screen"
+				description = "Amount of times you've died in the current level"
 			});
 			this.modules.Add(new Module
 			{
 				name = "Attempts",
-				description = "Right click to change the side on the screen"
+				description = "Amount of attempts you've spent in the current level"
 			});
 			this.modules.Add(new Module
 			{
 				name = "Clicks",
-				description = "Right click to change the side on the screen"
+				description = "Amount of times you've clicked in the current level"
 			});
-			this.modules.Add(new Module
+            this.modules.Add(new Module
+            {
+                name = "CPS",
+                description = "Amount of Clicks Per Second"
+            });
+            this.modules.Add(new Module
 			{
 				name = "Frames",
-				description = "Right click to change the side on the screen"
+				description = "Amount of frames you've recorded"
 			});
 			this.modules.Add(new Module
 			{
-				name = "Input",
-				description = "Right click to change the side on the screen"
+				name = "Replay Input",
+				description = "Displays the current input in the current playing replay"
 			});
 			this.modules.Add(new Module
 			{
 				name = "Message",
-				description = "Right click to change the side on the screen"
+				description = "Text"
 			});
 			foreach (Module module in this.modules)
 			{
@@ -73,36 +78,33 @@ namespace Windows
 			bool isInScene = StatusMGR.isInScene;
 			if (isInScene)
 			{
-				bool enabled = Status.window.modules[0].enabled;
-				if (enabled)
+				if (Status.window.modules[0].enabled)
 				{
 					Status.DrawSidedText("FPS: " + Mathf.Round(1f / Time.unscaledDeltaTime).ToString() + "\n", Status.window.modules[0]);
 				}
-				bool enabled2 = Status.window.modules[1].enabled;
-				if (enabled2)
+				if (Status.window.modules[1].enabled)
 				{
 					Status.DrawSidedText("Accuracy: " + decimal.Round(decimal.Parse(((float)(StatusMGR.frames - NoclipHook.deathCount) / (float)StatusMGR.frames * 100f).ToString()), 2).ToString() + "%\n", Status.window.modules[1]);
 				}
-				bool enabled3 = Status.window.modules[2].enabled;
-				if (enabled3)
+				if (Status.window.modules[2].enabled)
 				{
 					Status.DrawSidedText("Deaths: " + NoclipHook.deathCount.ToString() + "\n", Status.window.modules[2]);
 				}
-				bool enabled4 = Status.window.modules[3].enabled;
-				if (enabled4)
+				if (Status.window.modules[3].enabled)
 				{
 					Status.DrawSidedText("Attempt " + AttemptCounter.attempts.ToString() + "\n", Status.window.modules[3]);
 				}
-				bool enabled5 = Status.window.modules[4].enabled;
-				if (enabled5)
+				if (Status.window.modules[4].enabled)
 				{
 					Status.DrawSidedText("Clicks: " + Status.mouseclicks.ToString() + "\n", Status.window.modules[4]);
 				}
-				bool rightOn = Replay.replayMode.rightOn;
-				if (rightOn)
+                if (Status.window.modules[5].enabled)
+                {
+                    Status.DrawSidedText("CPS: " + Status.CPS.ToString() + "\n", Status.window.modules[5]);
+                }
+                if (Replay.replayMode.rightOn)
 				{
-					bool enabled6 = Status.window.modules[5].enabled;
-					if (enabled6)
+					if (Status.window.modules[6].enabled)
 					{
 						Status.DrawSidedText(string.Concat(new string[]
 						{
@@ -111,18 +113,23 @@ namespace Windows
 							" / ",
 							Replay.inputCheck.Count.ToString(),
 							"\n"
-						}), Status.window.modules[5]);
+						}), Status.window.modules[6]);
 					}
-					bool enabled7 = Status.window.modules[6].enabled;
-					if (enabled7)
+					if (Status.window.modules[7].enabled)
 					{
-						Status.DrawSidedText("Read Input: " + Replay.inputCheck[Replay.frame].ToString() + "\n", Status.window.modules[6]);
+						try
+						{
+                            Status.DrawSidedText("Replay Input: " + (Replay.inputCheck[Replay.frame] ? "Click" : "Not click") + "\n", Status.window.modules[7]);
+                        }
+                        catch (Exception)
+						{
+                            Status.DrawSidedText("Replay Input: Not click" + "\n", Status.window.modules[7]);
+						}
 					}
 				}
-				bool enabled8 = Status.window.modules[Status.window.modules.Count - 2].enabled;
-				if (enabled8)
+				if (Status.window.modules[8].enabled)
 				{
-					Status.DrawSidedText(PlayerPrefs.GetString("MessageText") + "\n", Status.window.modules[Status.window.modules.Count - 2]);
+					Status.DrawSidedText(PlayerPrefs.GetString("MessageText") + "\n", Status.window.modules[8]);
 				}
 			}
 		}
@@ -153,20 +160,31 @@ namespace Windows
 				if (flag2)
 				{
 					Status.mouseclicks++;
+					Status.CPS++;
 				}
 			}
-		}
+            if (Status.CPSTimer >= Mathf.Round(1f / Time.unscaledDeltaTime))
+            {
+                Status.CPS = 0;
+				Status.CPSTimer = 0;
+            }
+            Status.CPSTimer++;
+        }
 
-		// Token: 0x06000068 RID: 104 RVA: 0x0000659A File Offset: 0x0000479A
-		public override void OnSceneChanged(int buildIndex, string sceneName)
+        // Token: 0x06000068 RID: 104 RVA: 0x0000659A File Offset: 0x0000479A
+        public override void OnSceneChanged(int buildIndex, string sceneName)
 		{
 			Status.mouseclicks = 0;
-		}
+            Status.CPS = 0;
+            Status.CPSTimer = 0;
+        }
 
-		// Token: 0x04000036 RID: 54
-		private static int mouseclicks;
+        // Token: 0x04000036 RID: 54
+        private static int mouseclicks;
+        private static int CPS;
+        private static int CPSTimer;
 
-		// Token: 0x04000037 RID: 55
-		public static Window window;
+        // Token: 0x04000037 RID: 55
+        public static Window window;
 	}
 }

@@ -16,33 +16,27 @@ namespace Modules
 		}
 
 		// Token: 0x060000C7 RID: 199 RVA: 0x0000ABF8 File Offset: 0x00008DF8
-		public override void Update()
+		public override void OnClick()
 		{
-			if (this.enabled) {
-                string text = Application.dataPath;
-                bool flag = Application.platform == (RuntimePlatform)1;
-                if (flag)
-                {
-                    text += "/../../";
-                }
-                else
-                {
-                    bool flag2 = Application.platform == (RuntimePlatform)2;
-                    if (flag2)
-                    {
-                        text += "/../";
-                    }
-                }
-                text += "Cat.png";
-                this.texture = new Texture2D(10, 10);
-                this.texture.LoadRawTextureData(File.ReadAllBytes(text));
-                this.texture.Apply(true, false);
-                Texture2D texture2D = this.texture;
+            string text = Application.dataPath;
+            if (Application.platform == RuntimePlatform.OSXPlayer)
+            {
+                text += "/../../Assets/Cat.png";
             }
+            else if(Application.platform == RuntimePlatform.WindowsPlayer)
+            {
+                text += "/../Assets/Cat.png";
+            } else
+			{
+				text += "Assets/Cat.png";
+			}
+            this.texture = new Texture2D(10, 10);
+            this.texture.LoadRawTextureData(File.ReadAllBytes(text));
+            this.texture.Apply(true, false);
+            Texture2D texture2D = this.texture;
 			foreach (Image image in UnityEngine.Object.FindObjectsOfType<Image>())
 			{
-				bool flag = image.sprite.texture != this.texture;
-				if (flag)
+				if (image.sprite.texture != this.texture)
 				{
 					image.sprite = Sprite.Create(this.texture, new Rect(0f, 0f, (float)this.texture.width, (float)this.texture.height), Vector2.one * 0.5f);
 				}

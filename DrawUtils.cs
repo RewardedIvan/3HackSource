@@ -41,7 +41,10 @@ public class DrawUtils
 	// Token: 0x06000040 RID: 64 RVA: 0x000044D0 File Offset: 0x000026D0
 	public static Color Accent()
 	{
-		return DrawUtils.RGBCol();
+		if (PlayerPrefs.GetString("ChromeAccent") == "True")
+			return DrawUtils.RGBCol();
+		else
+			return Color.black;
 	}
 
 	// Token: 0x06000041 RID: 65 RVA: 0x000044E8 File Offset: 0x000026E8
