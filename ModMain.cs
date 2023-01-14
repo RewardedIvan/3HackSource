@@ -36,26 +36,7 @@ public class ModMain : MelonMod
 		bool keyDown = Input.GetKeyDown((KeyCode)303);
 		if (keyDown)
 		{
-			PlayerPrefs.SetString("Tutorial", "FOSS f2w");
-            // Join us now and share the software;
-            // You'll be free, hackers, you'll be free
-            // Join us now and share the software;
-            // You'll be free, hackers, you'll be free
-
-            // Hoarders can get piles of money
-            // That is true, hackers, that is true
-            // But they cannot help their neighbors;
-            // That's not good, hackers, that's not good
-
-            // When we have enough free software
-            // At our call, hackers, at our call
-            // We'll kick out those dirty licenses
-            // Ever more, hackers, ever more
-
-            // Join us now and share the software;
-            // You'll be free, hackers, you'll be free
-            // Join us now and share the software;
-            // You'll be free, hackers, you'll be free
+			PlayerPrefs.SetString("Tutorial", "Stop digging into the code you dirty bubby killer ;)");
         }
 		StatusMGR.Update();
 		bool keyDown2 = Input.GetKeyDown(ModMain.clickGUIKeyCode);
@@ -99,7 +80,7 @@ public class ModMain : MelonMod
 		if (flag3)
 		{
 			TextMeshProUGUI component = GameObject.Find("Version Text").GetComponent<TextMeshProUGUI>();
-			component.text += " (Modded by Explodingbill + RewardedIvan)";
+			component.text += " (Modded by Explodingbill)";
 			GameObject.Find("Version Text").GetComponent<RectTransform>().sizeDelta += new Vector2(500f, 0f);
 			GameObject.Find("Version Text").GetComponent<RectTransform>().anchoredPosition += new Vector2(250f, 0f);
 		}

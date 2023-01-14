@@ -15,7 +15,6 @@ namespace Windows
 			this.modules.Add(new Keybinds());
 			this.modules.Add(new Discord());
 			this.modules.Add(new ClickGUI());
-			this.modules.Add(new CatMode()); // you cant keep this secret
 		}
 	}
 }
