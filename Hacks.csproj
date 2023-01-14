@@ -155,10 +155,5 @@
     <Content Include="UnityEngine.UI.dll" />
     <Content Include="UnityEngine.UIModule.dll" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\.editorconfig">
-      <Link>.editorconfig</Link>
-    </None>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
