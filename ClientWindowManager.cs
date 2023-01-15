@@ -22,6 +22,8 @@ public class ClientWindowManager
 		this.wnds.Add(new Speedhack());
 		this.wnds.Add(new Windows.Display());
 		this.wnds.Add(new Windows.Replay());
+		this.wnds.Add(new Server());
+        this.wnds.Add(new Jump());
 
         string text = Application.dataPath;
         if (Application.platform == RuntimePlatform.OSXPlayer)
@@ -120,4 +122,6 @@ public class ClientWindowManager
 	// Token: 0x04000005 RID: 5
 	public List<Window> wnds = new List<Window>();
     Texture2D h3pluslogo = null;
+    public int wndDragged = -1;
+    public int wndDescription = -1;
 }

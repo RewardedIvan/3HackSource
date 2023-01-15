@@ -11,64 +11,25 @@ namespace Windows
 {
     public class Windows : Window
     {
-        public class GUIModule : Module
-        {
-            public GUIModule()
-            {
-                this.name = "GUI";
-                this.description = "Configure this menu";
-            }
-
-            public override void Update()
-            {
-                foreach (Window w in ModMain.cwm.wnds)
-                {
-                    if (w.name == "GUI")
-                    {
-                        w.render = this.enabled;
-                    }
-                }
-            }
-        }
-
-        public class ServerModule : Module
-        {
-            public ServerModule()
-            {
-                this.name = "Server";
-                this.description = "Configure the server to connect to";
-            }
-
-            public override void Update()
-            {
-                foreach (Window w in ModMain.cwm.wnds)
-                {
-                    if (w.name == "Server")
-                    {
-                        w.render = this.enabled;
-                    }
-                }
-            }
-        }
-
         public Windows()
         {
             this.rect.position = new Vector2(370f, 20f);
             this.name = "Windows";
             this.render = true;
 
-            this.modules.Add(new DebugModule());
-            this.modules.Add(new WorldModule());
-            this.modules.Add(new PlayerModule());
-            this.modules.Add(new GUIModule());
-            this.modules.Add(new ClientModule());
-            this.modules.Add(new SpeedhackModule());
-            this.modules.Add(new OptionsModule());
-            this.modules.Add(new StatusModule());
-            this.modules.Add(new CreatorModule());
-            this.modules.Add(new DisplayModule());
-            this.modules.Add(new ReplayModule());
-            this.modules.Add(new ServerModule());
+            this.modules.Add(new WindowModule("Debug", "Display debug information"));
+            this.modules.Add(new WindowModule("World", "Configure how the world works"));
+            this.modules.Add(new WindowModule("Player", "Configure how the player functions"));
+            this.modules.Add(new WindowModule("GUI", "Configure the GUI your looking at right now"));
+            this.modules.Add(new WindowModule("Client", "Client configuration"));
+            this.modules.Add(new WindowModule("Speedhack", "Hack the speed of your game"));
+            this.modules.Add(new WindowModule("Options", "Options for a module you've right clicked"));
+            this.modules.Add(new WindowModule("Status", ""));
+            this.modules.Add(new WindowModule("Creator", "Configure the editor"));
+            this.modules.Add(new WindowModule("Display", "Configure how you see the game"));
+            this.modules.Add(new WindowModule("Replay", "Replay a level you've beaten"));
+            this.modules.Add(new WindowModule("Server", "Configure the server your connecting to"));
+            this.modules.Add(new WindowModule("Jump", "Jump to other scenes"));
         }
     }
 }

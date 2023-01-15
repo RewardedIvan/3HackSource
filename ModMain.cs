@@ -81,8 +81,7 @@ public class ModMain : MelonMod
 			ModMain.initializedFonts = true;
 			foreach (TextMeshProUGUI textMeshProUGUI in UnityEngine.Object.FindObjectsOfType<TextMeshProUGUI>())
 			{
-				bool flag2 = !ModMain.fonts.Contains(textMeshProUGUI.font);
-				if (flag2)
+				if (!ModMain.fonts.Contains(textMeshProUGUI.font))
 				{
 					ModMain.fonts.Add(textMeshProUGUI.font);
 				}
@@ -99,7 +98,7 @@ public class ModMain : MelonMod
 		if (flag3)
 		{
 			TextMeshProUGUI component = GameObject.Find("Version Text").GetComponent<TextMeshProUGUI>();
-			component.text += " (Modded by Explodingbill + RewardedIvan)";
+			component.text += " (Modded by Explodingbill, RewardedIvan)";
 			GameObject.Find("Version Text").GetComponent<RectTransform>().sizeDelta += new Vector2(500f, 0f);
 			GameObject.Find("Version Text").GetComponent<RectTransform>().anchoredPosition += new Vector2(250f, 0f);
 		}
@@ -117,12 +116,10 @@ public class ModMain : MelonMod
 		}
 		GUI.skin.textArea.fontSize = Mathf.RoundToInt(32f * ModMain.scale);
 		ModMain.cwm.Draw();
-		bool editing2 = Keybinds.editing;
-		if (editing2)
+		if (Keybinds.editing)
 		{
 			string text = "None Selected\n";
-			bool flag = Keybinds.module != null;
-			if (flag)
+			if (Keybinds.module != null)
 			{
 				text = Keybinds.module.name + " Selected\n";
 			}
@@ -131,10 +128,9 @@ public class ModMain : MelonMod
 			DrawUtils.DrawText(new Rect((float)(Screen.width - 20 - 500), (float)(Screen.height - 20 - 300), 500f, 300f), text + "Press Escape To Stop Editing\nPress Backspace To Reset Keybind\nRight-Click On A Module To Select It", DrawUtils.Accent());
 			GUI.skin.label.fontSize = Mathf.RoundToInt(32f * ModMain.scale);
 		}
-		bool flag2 = !PlayerPrefs.HasKey("Tutorial");
-		if (flag2)
+		if (!PlayerPrefs.HasKey("Tutorial"))
 		{
-            Rect rect = new Rect(10f, (float)(Screen.height / 2), 310f, 60f);
+            Rect rect = new Rect(10f, (float)(Screen.height / 2), 300f, 300f);
 			GUI.skin.label.fontSize = Mathf.RoundToInt(32f * ModMain.scale);
 			GUI.skin.label.alignment = (TextAnchor)3;
 			DrawUtils.DrawRect(rect, new Color(0f, 0f, 0f, 0.35f));

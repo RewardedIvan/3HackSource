@@ -35,7 +35,7 @@ public class Module
         Vector2 vector = new Vector2(Input.mousePosition.x, (float)Screen.height - Input.mousePosition.y);
         UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleCenter;
         UnityEngine.GUI.skin.label.fontSize = Mathf.RoundToInt(23f * ModMain.scale);
-		if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
+		if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height) // TODO optimize like dragging and description
 		{
 			bool mouseButton = Input.GetMouseButton(0);
 			if (mouseButton)
@@ -151,14 +151,18 @@ public class Module
 		{
 			if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 			{
-				if (this.description != "")
+				if (this.description != "" && (ModMain.cwm.wndDescription == this.GetHashCode() || ModMain.cwm.wndDescription == -1))
 				{
+                    ModMain.cwm.wndDescription = this.GetHashCode();
                     UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleLeft;
 					DrawUtils.DrawRect(new Rect(10f, Screen.height - 10 - 40f * ModMain.scale * 2f, 60 * this.description.Length, 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.7f));
                     UnityEngine.GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
 					DrawUtils.DrawText(new Rect(15f, Screen.height - 10 - 40f * ModMain.scale * 2f, 60 * this.description.Length, 80f * ModMain.scale), this.description, Color.white);
-				}
-			}
+				} // TODO extend this to textinput
+			} else
+			{
+				ModMain.cwm.wndDescription = -1;
+            }
 		}
 		catch (Exception)
 		{

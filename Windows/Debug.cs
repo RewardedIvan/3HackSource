@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Windows
 {
@@ -21,8 +23,7 @@ namespace Windows
             UnityEngine.GUI.skin.label.fontSize = Mathf.RoundToInt(23f * ModMain.scale);
 			this.rectAct = new Rect(this.rect.x, this.rect.y, 230f * ModMain.scale, 50f * ModMain.scale);
 			float num = (float)((this.rect.y == 0f) ? 28 : 0);
-			bool showClickGUI = ModMain.showClickGUI;
-			if (showClickGUI)
+			if (ModMain.showClickGUI)
 			{
 				DrawUtils.DrawRect(this.rect, DrawUtils.Accent());
                 UnityEngine.GUI.skin.label.alignment = (TextAnchor)4;
@@ -35,7 +36,8 @@ namespace Windows
 			DrawUtils.DrawText(base.AddRect(this.rect, new Rect(0f, 50f * ModMain.scale - num, 20f, 0f)), "Frame Time: " + Time.unscaledDeltaTime.ToString().Substring(0, 5) + "ms", Color.white);
 			DrawUtils.DrawText(base.AddRect(this.rect, new Rect(0f, 80f * ModMain.scale - num, 0f, 0f)), "FPS: " + ((int)(1f / Time.unscaledDeltaTime)).ToString(), Color.white);
 			DrawUtils.DrawText(base.AddRect(this.rect, new Rect(0f, 110f * ModMain.scale - num, 0f, 0f)), "Objects: " + UnityEngine.Object.FindObjectsOfType<Transform>().Length.ToString(), Color.white);
-			this.rectAct = base.AddRect(this.rectAct, new Rect(0f, 0f, 0f, 50f * ModMain.scale * 4f));
+			DrawUtils.DrawText(base.AddRect(this.rect, new Rect(0f, 140f * ModMain.scale - num, 0f, 0f)), "Scenes: " + SceneManager.sceneCountInBuildSettings, Color.white);
+            this.rectAct = base.AddRect(this.rectAct, new Rect(0f, 0f, 0f, 50f * ModMain.scale * 4f));
 		}
 	}
 }

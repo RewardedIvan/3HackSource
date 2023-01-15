@@ -1,7 +1,8 @@
 ﻿using System;
 using Modules;
 using UnityEngine;
-using static Windows.Client;
+using System.IO;
+using ModuleType;
 
 namespace Windows
 {
@@ -9,15 +10,6 @@ namespace Windows
 	public class Client : Window
 	{
 		// Token: 0x0600005D RID: 93 RVA: 0x00005688 File Offset: 0x00003888
-		public class ResetToDefaults : Module
-		{
-			public ResetToDefaults()
-			{
-				this.name = "Reset to defaults";
-				this.description = "Resets the configuration";
-				// TODO
-			}
-		}
 
         public Client()
 		{

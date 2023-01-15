@@ -18,22 +18,19 @@ namespace ModuleType
 			DrawUtils.DrawRect(rect, new Color(0.14117648f, 0.14117648f, 0.14117648f));
 			DrawUtils.DrawRect(base.AddRect(rect, new Rect(4f, 4f, -8f, -8f)), new Color(0.11764706f, 0.11764706f, 0.11764706f));
 			this.text = DrawUtils.DrawTextField(base.AddRect(rect, new Rect(4f, 4f, -8f, -8f)), this.text, Color.white);
-			bool flag = this.numberOnly;
-			if (flag)
+			if (this.numberOnly)
 			{
 				this.text = Regex.Replace(this.text, "[^0-9 .]", "");
 			}
 			GUI.skin.label.alignment = (TextAnchor)4;
 			try
 			{
-				bool flag2 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-				if (flag2)
+				if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 				{
-					bool flag3 = this.description != "";
-					if (flag3)
+					if (this.description != "")
 					{
-						GUI.skin.label.alignment = (TextAnchor)3;
-						DrawUtils.DrawRect(new Rect(10f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.25f));
+						GUI.skin.label.alignment = TextAnchor.MiddleLeft;
+						DrawUtils.DrawRect(new Rect(10f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.7f));
 						GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
 						DrawUtils.DrawText(new Rect(15f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), this.description, Color.white);
 					}

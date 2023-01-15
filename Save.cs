@@ -10,15 +10,13 @@ public class Save
 	{
 		Save.path = Application.dataPath;
 		string text = "[modules]\n";
-		bool flag = Application.platform == (RuntimePlatform)1;
-		if (flag)
+		if (Application.platform == (RuntimePlatform)1)
 		{
 			Save.path += "/../../";
 		}
 		else
 		{
-			bool flag2 = Application.platform == (RuntimePlatform)2;
-			if (flag2)
+			if (Application.platform == (RuntimePlatform)2)
 			{
 				Save.path += "/../";
 			}
@@ -54,8 +52,7 @@ public class Save
 				"\n"
 			});
 		}
-		bool flag3 = !File.Exists(Save.path);
-		if (flag3)
+		if (!File.Exists(Save.path))
 		{
 			File.Create(Save.path);
 		}
@@ -92,22 +89,19 @@ public class Save
 	{
 		Save.header = "modules";
 		Save.path = Application.dataPath;
-		bool flag = Application.platform == (RuntimePlatform)1;
-		if (flag)
+		if (Application.platform == (RuntimePlatform)1)
 		{
 			Save.path += "/../../";
 		}
 		else
 		{
-			bool flag2 = Application.platform == (RuntimePlatform)2;
-			if (flag2)
+			if (Application.platform == (RuntimePlatform)2)
 			{
 				Save.path += "/../";
 			}
 		}
 		Save.path += "save.ini";
-		bool flag3 = File.Exists(Save.path);
-		if (flag3)
+		if (File.Exists(Save.path))
 		{
 			string text = File.ReadAllText(Save.path);
 			foreach (string text2 in text.Split("\n".ToCharArray()))
@@ -129,8 +123,7 @@ public class Save
 	public static void HandleLine(string line)
 	{
 		string[] array = line.Split(":".ToCharArray());
-		bool flag = Save.header == "pos";
-		if (flag)
+		if (Save.header == "pos")
 		{
 			foreach (Window window in ModMain.cwm.wnds)
 			{
@@ -144,8 +137,7 @@ public class Save
 		}
 		else
 		{
-			bool flag3 = Save.header == "modules";
-			if (flag3)
+			if (Save.header == "modules")
 			{
 				foreach (Window window2 in ModMain.cwm.wnds)
 				{
@@ -174,8 +166,7 @@ public class Save
 			}
 			else
 			{
-				bool flag6 = Save.header == "settings";
-				if (flag6)
+				if (Save.header == "settings")
 				{
 					foreach (Window window3 in ModMain.cwm.wnds)
 					{

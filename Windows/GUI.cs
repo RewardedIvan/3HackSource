@@ -1,7 +1,4 @@
-﻿using System;
-using MelonLoader;
-using Modules;
-using ModuleType;
+﻿using ModuleType;
 using UnityEngine;
 
 namespace Windows
@@ -14,7 +11,6 @@ namespace Windows
 		{
 			public SearchI()
 			{
-				// TODO this
 				this.text = PlayerPrefs.GetString("SearchValue", "");
 				this.description = "Search in the menu";
 			}
@@ -115,6 +111,7 @@ namespace Windows
 			this.modules.Add(new WindowWidthI());
 			this.modules.Add(new SpacingI());
 			this.modules.Add(new AccentColor());
+            // TODO Color wheel
         }
 	}
 }

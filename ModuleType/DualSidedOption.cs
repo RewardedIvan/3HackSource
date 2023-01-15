@@ -13,8 +13,7 @@ namespace ModuleType
             Vector2 vector = new Vector2(Input.mousePosition.x, (float)Screen.height - Input.mousePosition.y);
             GUI.skin.label.alignment = (TextAnchor)4;
 			GUI.skin.label.fontSize = Mathf.RoundToInt(23f * ModMain.scale);
-			bool flag = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width / 2f && vector.y < rect.y + rect.height;
-			if (flag)
+			if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width / 2f && vector.y < rect.y + rect.height)
 			{
 				bool mouseButton = Input.GetMouseButton(0);
 				if (mouseButton)
@@ -30,8 +29,7 @@ namespace ModuleType
 			{
 				DrawUtils.DrawRect(new Rect(rect.x, rect.y, rect.width / 2f, rect.height), new Color(0.14117648f, 0.14117648f, 0.14117648f));
 			}
-			bool flag2 = vector.x > rect.x + rect.width / 2f && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-			if (flag2)
+			if (vector.x > rect.x + rect.width / 2f && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 			{
 				bool mouseButton2 = Input.GetMouseButton(0);
 				if (mouseButton2)
@@ -47,12 +45,10 @@ namespace ModuleType
 			{
 				DrawUtils.DrawRect(new Rect(rect.x + rect.width / 2f, rect.y, rect.width / 2f, rect.height), new Color(0.14117648f, 0.14117648f, 0.14117648f));
 			}
-			bool flag3 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-			if (flag3)
+			if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 			{
 				Event current = Event.current;
-				bool flag4 = current.button == 0 && current.type == 0;
-				if (flag4)
+				if (current.button == 0 && current.type == 0)
 				{
 					bool flag5 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width / 2f && vector.y < rect.y + rect.height;
 					if (flag5)
@@ -69,19 +65,16 @@ namespace ModuleType
 					ModMain.cwm.wnds.Remove(wnd);
 					ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, wnd);
 				}
-				bool flag7 = current.button == 1 && Keybinds.editing;
-				if (flag7)
+				if (current.button == 1 && Keybinds.editing)
 				{
 					ModMain.cwm.wnds.Remove(wnd);
 					ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, wnd);
 					Keybinds.module = this;
 				}
 			}
-			bool flag8 = this.anySelected;
-			if (flag8)
+			if (this.anySelected)
 			{
-				bool flag9 = !this.rightOn;
-				if (flag9)
+				if (!this.rightOn)
 				{
 					GUI.skin.label.alignment = (TextAnchor)3;
 					DrawUtils.DrawText(rect, " " + this.name1, DrawUtils.Accent());
@@ -106,14 +99,12 @@ namespace ModuleType
 			GUI.skin.label.alignment = (TextAnchor)4;
 			try
 			{
-				bool flag10 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-				if (flag10)
+				if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 				{
-					bool flag11 = this.description != "";
-					if (flag11)
+					if (this.description != "")
 					{
 						GUI.skin.label.alignment = (TextAnchor)3;
-						DrawUtils.DrawRect(new Rect(10f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.25f));
+						DrawUtils.DrawRect(new Rect(10f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.7f));
 						GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
 						DrawUtils.DrawText(new Rect(15f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), this.description, Color.white);
 					}

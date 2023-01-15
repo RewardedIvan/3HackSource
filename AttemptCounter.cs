@@ -30,8 +30,7 @@ public class AttemptCounter
 	// Token: 0x06000003 RID: 3 RVA: 0x000020E0 File Offset: 0x000002E0
 	private static void SceneManager_activeSceneChanged(Scene arg0, Scene arg1)
 	{
-		bool flag = UnityEngine.Object.FindObjectOfType<PlayerScript>() == null;
-		if (flag)
+		if (UnityEngine.Object.FindObjectOfType<PlayerScript>() == null)
 		{
 			AttemptCounter.attempts = 0;
 		}

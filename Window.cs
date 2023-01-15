@@ -63,16 +63,19 @@ public class Window
             if (flag)
             {
                 this.dragging = false;
+                ModMain.cwm.wndDragged = -1;
             }
             float timeScale = Time.timeScale;
             Time.timeScale = 0.1f;
             if (vector.x > this.rect.position.x && vector.y > this.rect.position.y && vector.x < this.rect.position.x + this.rect.width && vector.y < this.rect.position.y + this.rect.height)
             {
                 bool mouseButtonDown = Input.GetMouseButtonDown(0);
-                if (mouseButtonDown && this.render)
+                if (mouseButtonDown && this.render && (ModMain.cwm.wndDragged == this.GetHashCode() || ModMain.cwm.wndDragged == -1))
                 {
                     this.offset = this.rect.position - vector;
                     this.dragging = true;
+                    ModMain.cwm.wndDragged = this.GetHashCode();
+
                     // just why??
                     //ModMain.cwm.wnds.Remove(this);
                     //ModMain.cwm.wnds.Insert(ModMain.cwm.wnds.Count, this);
