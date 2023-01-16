@@ -19,8 +19,7 @@ public class SceneTile
 	{
         Rect rect = new Rect(0f, 0f, 384f, (float)(Screen.height - 384));
         rect.position = this.positions[(int)this.spot.x];
-		bool flag = this.spot == selectedSpot;
-		if (flag)
+		if (this.spot == selectedSpot)
 		{
 			DrawUtils.DrawOutlinedRect(rect, DrawUtils.Accent(), 7f);
 		}

@@ -9,14 +9,13 @@ public class Window
     public virtual void Draw()
     {
         GUI.skin.label.fontSize = Mathf.RoundToInt(23f * ModMain.scale);
-        bool flag = !ModMain.showClickGUI;
-        if (!flag)
+        if (ModMain.showClickGUI)
         {
             this.rectAct = new Rect(this.rect.x, this.rect.y, 230f * ModMain.scale, 50f * ModMain.scale);
             DrawUtils.DrawRect(this.rect, DrawUtils.Accent());
             GUI.skin.label.alignment = (TextAnchor)4;
             DrawUtils.DrawText(this.rect, this.name, Color.white);
-            DrawUtils.DrawRect(this.AddRect(this.rect, new Rect(0f, 50f * ModMain.scale, 0f, ModMain.spacing * ModMain.scale * (float)this.modules.Count)), new Color(0.14117648f, 0.14117648f, 0.14117648f));
+            DrawUtils.DrawRect(this.AddRect(this.rect, new Rect(0f, 50f * ModMain.scale, 0f, ModMain.spacing * ModMain.scale * (float)this.modules.Count)), ModMain.cwm.bg);
             Vector2 vector = new Vector2(Input.mousePosition.x, (float)Screen.height - Input.mousePosition.y);
             int num = 0;
             foreach (Module module in this.modules)

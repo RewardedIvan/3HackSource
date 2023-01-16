@@ -15,8 +15,7 @@ namespace ModuleType
 		// Token: 0x060000AB RID: 171 RVA: 0x000082F4 File Offset: 0x000064F4
 		public override void Update()
 		{
-			bool enabled = this.enabled;
-			if (enabled)
+			if (this.enabled)
 			{
 				bool flag = this.canClick;
 				if (flag)
@@ -43,8 +42,7 @@ namespace ModuleType
             Vector2 vector = new Vector2(Input.mousePosition.x, (float)Screen.height - Input.mousePosition.y);
             GUI.skin.label.alignment = (TextAnchor)4;
 			GUI.skin.label.fontSize = Mathf.RoundToInt(23f * ModMain.scale);
-			bool flag2 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-			if (flag2)
+			if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 			{
 				bool mouseButton = Input.GetMouseButton(0);
 				if (mouseButton)
@@ -88,8 +86,7 @@ namespace ModuleType
                     if (this.enabled)
                     {
                         DrawUtils.DrawText(rect, this.name, DrawUtils.Accent());
-                        bool flag7 = this.keybind > 0;
-                        if (flag7)
+                        if (this.keybind > 0)
                         {
                             GUI.skin.label.alignment = (TextAnchor)5;
                             DrawUtils.DrawText(rect, "[" + this.keybind.ToString() + "] ", DrawUtils.Accent());
@@ -157,16 +154,9 @@ namespace ModuleType
 			GUI.skin.label.alignment = (TextAnchor)4;
 			try
 			{
-				bool flag9 = vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height;
-				if (flag9)
+				if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 				{
-					if (this.description != "")
-					{
-                        UnityEngine.GUI.skin.label.alignment = TextAnchor.MiddleLeft;
-                        DrawUtils.DrawRect(new Rect(10f, Screen.height - 10 - 40f * ModMain.scale * 2f, 60 * this.description.Length, 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.7f));
-                        UnityEngine.GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
-                        DrawUtils.DrawText(new Rect(15f, Screen.height - 10 - 40f * ModMain.scale * 2f, 60 * this.description.Length, 80f * ModMain.scale), this.description, Color.white);
-                    }
+					DrawUtils.DrawDescription(this.description, this.GetHashCode());
 				}
 			}
 			catch (Exception)

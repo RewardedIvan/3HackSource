@@ -9,7 +9,14 @@ namespace Windows
 	// Token: 0x0200001C RID: 28
 	public class Client : Window
 	{
-		// Token: 0x0600005D RID: 93 RVA: 0x00005688 File Offset: 0x00003888
+		public class Authors : Button
+		{
+			public Authors()
+			{
+				this.name = "Authors";
+				this.description = "- Explodingbill\n- RewardedIvan";
+			}
+		}
 
         public Client()
 		{
@@ -17,7 +24,8 @@ namespace Windows
 			this.name = "Client";
 			this.modules.Add(new Keybinds());
 			this.modules.Add(new Discord());
-			this.modules.Add(new ClickGUI());
+            this.modules.Add(new Authors());
+            this.modules.Add(new ClickGUI());
 			this.modules.Add(new CatMode()); // you cant keep this secret
 			this.modules.Add(new ResetToDefaults());
 			this.modules.Add(new Quit());

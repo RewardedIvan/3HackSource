@@ -27,13 +27,7 @@ namespace ModuleType
 			{
 				if (vector.x > rect.x && vector.y > rect.y && vector.x < rect.x + rect.width && vector.y < rect.y + rect.height)
 				{
-					if (this.description != "")
-					{
-						GUI.skin.label.alignment = TextAnchor.MiddleLeft;
-						DrawUtils.DrawRect(new Rect(10f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), new Color(0.14117648f, 0.14117648f, 0.14117648f, 0.7f));
-						GUI.skin.label.fontSize = Mathf.RoundToInt(45f * ModMain.scale);
-						DrawUtils.DrawText(new Rect(15f, (float)(Screen.height - 10) - 40f * ModMain.scale * 2f, (float)(60 * this.description.Length), 80f * ModMain.scale), this.description, Color.white);
-					}
+					DrawUtils.DrawDescription(this.description, this.GetHashCode());
 				}
 			}
 			catch (Exception)

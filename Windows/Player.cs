@@ -19,6 +19,7 @@ namespace Windows
 			this.modules.Add(new FlipGravity());
 			this.modules.Add(new ShowAttemptCount());
 			this.modules.Add(new ShowHitbox());
+			this.modules.Add(new DontRotateCam());
 		}
 	}
 }

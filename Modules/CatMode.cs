@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Modules
 {
 	// Token: 0x02000039 RID: 57
-	public class CatMode : Module
+	public class CatMode : ModuleType.Button
 	{
 		// Token: 0x060000C6 RID: 198 RVA: 0x0000AB2C File Offset: 0x00008D2C
 		public CatMode()

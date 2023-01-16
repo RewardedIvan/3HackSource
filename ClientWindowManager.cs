@@ -123,5 +123,6 @@ public class ClientWindowManager
 	public List<Window> wnds = new List<Window>();
     Texture2D h3pluslogo = null;
     public int wndDragged = -1;
-    public int wndDescription = -1;
+    public int DescHash = -1;
+    public Color bg = new Color(0.14117648f, 0.14117648f, 0.14117648f);
 }

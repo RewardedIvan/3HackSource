@@ -37,6 +37,7 @@ namespace Windows
 			DrawUtils.DrawText(base.AddRect(this.rect, new Rect(0f, 80f * ModMain.scale - num, 0f, 0f)), "FPS: " + ((int)(1f / Time.unscaledDeltaTime)).ToString(), Color.white);
 			DrawUtils.DrawText(base.AddRect(this.rect, new Rect(0f, 110f * ModMain.scale - num, 0f, 0f)), "Objects: " + UnityEngine.Object.FindObjectsOfType<Transform>().Length.ToString(), Color.white);
 			DrawUtils.DrawText(base.AddRect(this.rect, new Rect(0f, 140f * ModMain.scale - num, 0f, 0f)), "Scenes: " + SceneManager.sceneCountInBuildSettings, Color.white);
+			DrawUtils.DrawText(base.AddRect(this.rect, new Rect(0f, 170f * ModMain.scale - num, 0f, 0f)), "CamAngle: " + UnityEngine.Object.FindObjectOfType<Camera>().transform.localEulerAngles, Color.white);
             this.rectAct = base.AddRect(this.rectAct, new Rect(0f, 0f, 0f, 50f * ModMain.scale * 4f));
 		}
 	}
